@@ -1,19 +1,48 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import DemoFFLayout from "../../layouts/DemoFFLayout.astro";
+const mainPath = "/assets/fastFood";
+const img = {
+  hamburgesa: `${mainPath}/img/hamburguesa.jpg`,
+  hamburgesaCPapas: `${mainPath}/img/hamburguesa-papas.jpg`,
+  papas: `${mainPath}/img/papas.jpg`,
+  soda: `${mainPath}/img/refresco.jpg`,
+  aguacate: `${mainPath}/img/aguacate.jpg`,
+};
 ---
 
-<Layout title="Promociones">
-	<main>
-		<section class="section container">
-			<h1 class="section-title" style="margin-top: 100px;">Todas Nuestras Promociones</h1>
-			<div class="grid">
-				<img src="https://picsum.photos/id/106/400/400" alt="Promoción 1" style="width:100%; height:auto; border-radius: 8px;" />
-				<img src="https://picsum.photos/id/107/400/400" alt="Promoción 2" style="width:100%; height:auto; border-radius: 8px;" />
-				<img src="https://picsum.photos/id/108/400/400" alt="Promoción 3" style="width:100%; height:auto; border-radius: 8px;" />
-				<img src="https://picsum.photos/id/109/400/400" alt="Promoción 4" style="width:100%; height:auto; border-radius: 8px;" />
-				<img src="https://picsum.photos/id/110/400/400" alt="Promoción 5" style="width:100%; height:auto; border-radius: 8px;" />
-				<img src="https://picsum.photos/id/111/400/400" alt="Promoción 6" style="width:100%; height:auto; border-radius: 8px;" />
-			</div>
-		</section>
-	</main>
-</Layout>
+<DemoFFLayout title="Promociones">
+  <main>
+    <section class="section container">
+      <h1 class="section-title">
+        Todas Nuestras Promociones
+      </h1>
+      <div class="grid">
+        <img src={img.hamburgesa} alt="Promoción 1" />
+        <img src={img.papas} alt="Promoción 2" />
+        <img src={img.soda} alt="Promoción 3" />
+        <img src={img.hamburgesaCPapas} alt="Promoción 4" />
+        <img src={img.aguacate} alt="Promoción 5" />
+        <img src={img.papas} alt="Promoción 6" />
+		<img src={img.hamburgesa} alt="Promoción 7" />
+		<img src={img.soda} alt="Promoción 8" />
+      </div>
+    </section>
+  </main>
+</DemoFFLayout>
+
+<style>
+  .grid {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .grid img{
+	width: 250px;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+	border-radius: 8px;
+  }
+</style>
