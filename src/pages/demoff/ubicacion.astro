@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Ubicación y Contacto">
+	<main>
+		<section class="section container">
+			<h1 class="section-title" style="margin-top: 100px;">Ubicación y Contacto</h1>
+			<div class="location-grid">
+				<div class="location-info">
+					<p><strong>Dirección:</strong> Avenida Ejemplo 123, Ciudad de Ejemplo.</p>
+					<p><strong>Teléfono:</strong> <a href="tel:+521234567890" style="color: var(--accent-red);">+52 55 1234 5678</a></p>
+					<p><strong>Horario:</strong></p>
+					<ul>
+						<li>Lunes a Viernes: 11:00 AM - 10:00 PM</li>
+						<li>Sábado y Domingo: 12:00 PM - 11:00 PM</li>
+					</ul>
+				</div>
+				<div class="map-placeholder">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.4552467292276!2d-99.19917528489718!3d19.432609586887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8d4e5f7a2d1%3A0x6d36e7a2b9d2f2c!2sEl%20Angel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1677610000000!5m2!1ses-419!2smx" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.location-grid {
+		display: grid;
+		gap: 40px;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+	}
+	.location-info p{
+		padding: 1rem 0;
+	}
+	.location-info ul {
+		list-style-type: none;
+		padding-left: 0;
+	}
+	.location-info li {
+		margin-bottom: 5px;
+	}
+	@media (max-width: 768px) {
+		.location-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

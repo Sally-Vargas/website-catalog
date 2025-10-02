@@ -1,0 +1,90 @@
+---
+import Card from "./Card.astro";
+
+const projects = [
+  {
+    title: 'Demo Fast Food',
+    image: '/assets/img/cat-pc-rain.jpg',
+    description:
+      'Demostración de una página web para un restaurante de comida rápida.',
+    link: '/demoff'
+  },
+  {
+    title: 'Demo Beauty Salon',
+    image: '/assets/img/cat-pc-rain.jpg',
+    description:
+      'Demostración de una landing page para un salon de belleza.',
+    link: '/demoBeautySalon'
+  },
+  {
+    title: 'Demo Nails Salon',
+    image: '/assets/img/cat-pc-rain.jpg',
+    description:
+      'Demostración de una landing page para un salon de uñas.',
+    link: '/demoNails'
+  },
+  {
+    title: 'Demo Food Menu',
+    image: '/assets/img/cat-pc-rain.jpg',
+    description:
+      'Demostración de varios menús para restaurantes de comida rápida.',
+    link: '/assets/img/aries-1.jpg'
+  }
+];
+---
+
+<div class="box-section">
+    <div class="boxes-container">
+        {projects.map((project) => (
+        <Card 
+        title={project.title}
+        image={project.image}
+        description={project.description}
+        link={project.link}
+        />
+        ))}
+    </div>
+</div>
+
+
+<style>
+  :root {
+    --bg: #5e548e;
+  }
+
+  .box{
+    margin-bottom: 100px;
+  }
+
+  .box-section {
+    height: 50vh;
+    background-color: var(--bg);
+    padding: 50px 20px;
+    align-content: center;
+    width: 100%;
+    margin-bottom: 200px;
+  }
+
+  .boxes-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5rem 0;
+  }
+
+
+  /* Media query para pantallas responsivas (tabletas y móviles) */
+  @media (max-width: 768px) {
+    .boxes-container {
+      flex-direction: column;
+      padding: 10px 10px;
+    }
+  }
+
+  /* Media query para pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .boxes-container {
+      flex-direction: column;
+    }
+  }
+</style>

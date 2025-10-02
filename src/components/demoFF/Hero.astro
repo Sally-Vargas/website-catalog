@@ -1,0 +1,37 @@
+---
+---
+
+<section class="hero-section">
+			<div class="hero-content">
+				<h1>El Sabor Que Amas, A Tu Manera.</h1>
+				<p>Las hamburguesas más jugosas y el servicio más rápido de la ciudad.</p>
+				<a href="/menu" class="btn">Ver Menú</a>
+			</div>
+		</section>
+
+<style>
+	.hero-section {
+		background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/assets/fastFood/img/hamburguesa-papas.jpg');
+		background-size: cover;
+		background-position: center;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+	.hero-content h1 {
+		font-size: 4em;
+		color: var(--accent-yellow);
+	}
+	.hero-content p {
+		font-size: 1.2em;
+		max-width: 600px;
+		margin: 0 auto 20px;
+	}
+	@media (max-width: 768px) {
+		.hero-content h1 {
+			font-size: 2.5em;
+		}
+	}
+</style>

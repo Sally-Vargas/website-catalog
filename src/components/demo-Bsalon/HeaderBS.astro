@@ -1,0 +1,42 @@
+---
+import "../../styles/beautySalon.css";
+---
+
+<header class="header">
+  <div class="container">
+    <a href="#hero" class="logo">DEMO Beauty Salon</a>
+    <nav class="nav" id="nav">
+      <ul class="nav-list">
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <!-- <li><a href="#equipo" class="nav-link">Equipo</a></li> -->
+        <li><a href="#galeria" class="nav-link">Galería</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const nav = document.getElementById("nav");
+    if (menuToggle && nav) {
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+      const navLinks = nav.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (nav.classList.contains("active")) {
+            nav.classList.remove("active");
+          }
+        });
+      });
+    }
+  });
+</script>

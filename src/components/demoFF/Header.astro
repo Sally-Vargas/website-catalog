@@ -1,0 +1,117 @@
+<header class="main-header">
+	<div class="container">
+		<a href="/" class="logo">Demo Fast Food</a>
+		<nav class="nav" id="nav">
+			<ul class="nav-list">
+				<li><a href="/#popular" class="nav-link">Lo Más Popular</a></li>
+				<li><a href="/#promociones" class="nav-link">Promociones</a></li>
+				<li><a href="/menu" class="nav-link">Menú</a></li>
+				<li><a href="/ubicacion" class="nav-link">Ubicación</a></li>
+			</ul>
+		</nav>
+		<button class="menu-toggle" id="menu-toggle">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+	</div>
+</header>
+
+<style>
+	.main-header {
+		background-color: rgba(0,0,0,0.8);
+		color: var(--text-white);
+		padding: 20px 0;
+		position: fixed;
+		width: 100%;
+		top: 0;
+		z-index: 1000;
+	}
+	.main-header .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.logo {
+		font-family: 'Bebas Neue', sans-serif;
+		font-size: 2.2em;
+		letter-spacing: 3px;
+		color: var(--accent-yellow);
+	}
+	.nav-list {
+		list-style: none;
+		display: flex;
+		gap: 20px;
+	}
+	.nav-link {
+		color: var(--text-white);
+		font-weight: bold;
+		transition: color 0.3s ease;
+	}
+	.nav-link:hover {
+		color: var(--accent-yellow);
+	}
+	.menu-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 30px;
+		height: 20px;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
+	.menu-toggle span {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: var(--text-white);
+		transition: transform 0.3s;
+	}
+
+	@media (max-width: 768px) {
+		.nav {
+			display: none;
+			width: 100%;
+			text-align: center;
+			background-color: rgba(0,0,0,0.9);
+			position: absolute;
+			top: 100%;
+			left: 0;
+			padding: 20px 0;
+		}
+		.nav.active {
+			display: block;
+		}
+		.nav-list {
+			flex-direction: column;
+			gap: 10px;
+		}
+		.menu-toggle {
+			display: flex;
+		}
+	}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+
+        // Verificar que los elementos existen antes de usarlos
+        if (menuToggle && nav) {
+            menuToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+
+            const navLinks = nav.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                    }
+                });
+            });
+        }
+    });
+</script>
