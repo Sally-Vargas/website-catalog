@@ -1,19 +1,28 @@
 ---
+import { Image } from 'astro:assets';
+import heroImage from './img/hamburguesa-papas.jpg';
 ---
 
 <section class="hero-section">
-			<div class="hero-content">
-				<h1>El Sabor Que Amas, A Tu Manera.</h1>
-				<p>Las hamburguesas más jugosas y el servicio más rápido de la ciudad.</p>
-				<a href="/menu" class="btn">Ver Menú</a>
-			</div>
-		</section>
+	<Image 
+		src={heroImage} 
+		alt="Fondo de hamburguesas con papas fritas"
+		widths={[480, 768, 1280, 1920]}
+        sizes="100vw"
+        quality="mid"
+		class="hero-bg-image"
+	/>
+	<div class="hero-overlay"></div>
+	<div class="hero-content">
+		<h1>El Sabor Que Amas, A Tu Manera.</h1>
+		<p>Las hamburguesas más jugosas y el servicio más rápido de la ciudad.</p>
+		<a href="/menu" class="btn">Ver Menú</a>
+	</div>
+</section>
 
 <style>
 	.hero-section {
-		background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/assets/fastFood/img/hamburguesa-papas.jpg');
-		background-size: cover;
-		background-position: center;
+		position: relative; /* Contenedor para los elementos posicionados absolutamente */
 		height: 100vh;
 		display: flex;
 		align-items: center;
@@ -21,13 +30,33 @@
 		text-align: center;
 	}
 	.hero-content h1 {
+		position: relative; /* Para que esté sobre la capa de superposición */
 		font-size: 4em;
 		color: var(--accent-yellow);
 	}
 	.hero-content p {
+		position: relative; /* Para que esté sobre la capa de superposición */
 		font-size: 1.2em;
 		max-width: 600px;
 		margin: 0 auto 20px;
+	}
+	.hero-content .btn {
+		position: relative; /* Para que esté sobre la capa de superposición */
+	}
+	.hero-bg-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover; /* Equivalente a background-size: cover */
+		z-index: -2; /* Detrás de todo */
+	}
+	.hero-overlay {
+		position: absolute;
+		inset: 0; /* Cubre todo el contenedor (top, right, bottom, left = 0) */
+		background-color: rgba(0, 0, 0, 0.6); /* El degradado oscuro */
+		z-index: -1; /* Entre la imagen y el contenido */
 	}
 	@media (max-width: 768px) {
 		.hero-content h1 {

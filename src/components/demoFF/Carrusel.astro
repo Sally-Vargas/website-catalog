@@ -1,32 +1,27 @@
 ---
-// const time = "20s";
-const mainPath = "/assets/fastFood";
-
-const img = {
-  hamburgesa: `${mainPath}/img/hamburguesa.jpg`,
-  hamburgesaCPapas: `${mainPath}/img/hamburguesa-papas.jpg`,
-  papas: `${mainPath}/img/papas.jpg`,
-  soda: `${mainPath}/img/refresco.jpg`,
-  aguacate: `${mainPath}/img/aguacate.jpg`,
-};
+import { Image } from 'astro:assets';
+import hamburgesa from './img/hamburguesa.jpg';
+import hamburgesaCPapas from './img/hamburguesa-papas.jpg';
+import papas from './img/papas.jpg';
+import aguacate from './img/aguacate.jpg';
 ---
 
 <section id="promociones" class="section">
   <h2 class="section-title">Promociones del Mes</h2>
   <div class="carousel-container">
     <div class="carousel-track">
-      <img src={img.hamburgesaCPapas} alt="Promoción 1" />
-      <img src={img.hamburgesa} alt="Promoción 2" />
-      <img src={img.papas} alt="Promoción 3" />
-      <img src={img.aguacate} alt="Promoción 4" />
+      <Image src={hamburgesaCPapas} alt="Promoción 1" />
+      <Image src={hamburgesa} alt="Promoción 2" />
+      <Image src={papas} alt="Promoción 3" />
+      <Image src={aguacate} alt="Promoción 4" />
 
-      <img
-        src={img.papas}
+      <Image
+        src={papas}
         alt="Promoción 1 (duplicado)"
       />
-      <img src={img.hamburgesa} alt="Promoción 2 (duplicado)" />
-      <img src={img.papas} alt="Promoción 3 (duplicado)" />
-      <img src={img.aguacate} alt="Promoción 4 (duplicado)" />
+      <Image src={hamburgesa} alt="Promoción 2 (duplicado)" />
+      <Image src={papas} alt="Promoción 3 (duplicado)" />
+      <Image src={aguacate} alt="Promoción 4 (duplicado)" />
     </div>
   </div>
 </section>
@@ -53,7 +48,7 @@ const img = {
     width: calc(var(--image-width) * var(--image-count) * 2);
   }
 
-  .carousel-track img {
+  .carousel-track :global(img) {
     height: 300px;
     width: var(--image-width);
     object-fit: cover;
@@ -84,7 +79,7 @@ const img = {
       font-size: 2em;
     }
 
-    .carousel-track img {
+    .carousel-track :global(img) {
       /* Ya no necesitas min-width si usas la variable width: var(--image-width); */
       width: var(--image-width);
       height: 200px;
