@@ -113,7 +113,7 @@ nav {
 .hero {
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/assets/img/BSImg/hero.jpg");
+    url("/assets/BSImg/hero.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -201,10 +201,10 @@ nav {
 }
 
 /*Banner*/
-.banner {
+/* .banner {
   height: 50vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/assets/img/BSImg/banner.jpg");
+    url("/assets/BSImg/banner.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -224,7 +224,7 @@ nav {
 .banner-content p {
   font-size: 1.2em;
   margin-bottom: 30px;
-}
+} */
 
 /* Estilos para el Carrusel de Imágenes */
 .carousel-container {
@@ -331,6 +331,10 @@ nav {
   }
   .hero-content h1 {
     font-size: 2.5em;
+  }
+
+  .logo{
+    font-size: 1.5rem;
   }
   .section {
     padding: 60px 0;

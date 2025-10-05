@@ -1,61 +1,143 @@
 ---
-import DemoFFLayout from '../../layouts/DemoFFLayout.astro';
+import DemoFFLayout from "../../layouts/DemoFFLayout.astro";
 ---
 
 <DemoFFLayout title="Ubicación y Contacto">
-	<main>
-		<section class="section container">
-			<h1 class="section-title">Ubicación y Contacto</h1>
-			<div class="location-grid">
-				<div class="location-info">
-					<h4><strong>Dirección:</strong></h4> 
-					<p>Avenida Ejemplo 123, Ciudad de Ejemplo.</p>
-					<h4><strong>Teléfono:</strong></h4>
-						<p>52 55 1234 5678</p>
-					<h4><strong>Horario:</strong></h4>
-					<ul>
-						<li>Lunes a Viernes: 11:00 AM - 10:00 PM</li>
-						<li>Sábado y Domingo: 12:00 PM - 11:00 PM</li>
-					</ul>
-				</div>
-				<div class="map-placeholder">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.4552467292276!2d-99.19917528489718!3d19.432609586887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8d4e5f7a2d1%3A0x6d36e7a2b9d2f2c!2sEl%20Angel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1677610000000!5m2!1ses-419!2smx" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
-				</div>
-			</div>
-		</section>
-	</main>
+  <main>
+    <section class="section container">
+      <h1 class="section-title">Ubicación y Contacto</h1>
+      <div class="location-grid">
+        <div class="location-info">
+          <h4><strong>Dirección:</strong></h4>
+          <p>Avenida Ejemplo 123, Ciudad de Ejemplo.</p>
+          <h4><strong>Teléfono:</strong></h4>
+          <p>52 55 1234 5678</p>
+          <h4><strong>Horario:</strong></h4>
+          <ul>
+            <li>Lunes a Viernes: 11:00 AM - 10:00 PM</li>
+            <li>Sábado y Domingo: 12:00 PM - 11:00 PM</li>
+          </ul>
+        </div>
+        <div class="map-placeholder">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.4552467292276!2d-99.19917528489718!3d19.432609586887556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8d4e5f7a2d1%3A0x6d36e7a2b9d2f2c!2sEl%20Angel%20de%20la%20Independencia!5e0!3m2!1ses-419!2smx!4v1677610000000!5m2!1ses-419!2smx"
+            width="100%"
+            height="450"
+            style="border:0; border-radius: 8px;"
+            allowfullscreen=""
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
 </DemoFFLayout>
 
 <style>
-	.location-grid {
-		display: flex;
-		flex-direction: column;
-		gap: 40px;
-		align-items: center;
-	}
-	.location-info{
-		text-align: center;
-	}
-	.location-info p{
-		text-align: center;
-	}
-	.location-info ul {
-		list-style-type: none;
-		padding-left: 0;
-	}
-	.location-info li {
-		margin-bottom: 5px;
-	}
-	.location-info h4{
-		color: var(--accent-yellow);
-		padding: 1rem 0;
-	}
-	.map-placeholder{
-		width: 50%;
-	}
-	@media (max-width: 768px) {
-		.location-grid {
-			grid-template-columns: 1fr;
-		}
-	}
+  .location-grid {
+    /* CLAVE: Usamos Grid para controlar el layout de 2 columnas */
+    display: grid;
+    /* Por defecto en escritorio: 2 columnas, una para info (1fr) y otra para mapa (más grande) */
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start; /* Alineación al inicio para un diseño limpio */
+  }
+
+  /* ------------------------------------------------ */
+  /* COLUMNA DE INFORMACIÓN                           */
+  /* ------------------------------------------------ */
+  .location-info {
+    text-align: left; /* Alineamos el texto a la izquierda en escritorio */
+    padding: 20px;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+  }
+  .location-info h4 {
+    color: var(--accent-yellow);
+    padding: 0.5rem 0 0.2rem;
+    margin-top: 15px;
+    font-size: 1.1em;
+  }
+  .location-info p {
+    /* Eliminamos el text-align: center redundante */
+    margin-bottom: 15px;
+  }
+  .location-info ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 5px;
+    font-size: 0.95em;
+  }
+  .location-info li {
+    margin-bottom: 5px;
+  }
+
+  /* ------------------------------------------------ */
+  /* COLUMNA DEL MAPA                                 */
+  /* ------------------------------------------------ */
+  .map-placeholder {
+    /* Eliminamos el width: 50% ya que Grid controla el ancho */
+    width: 100%;
+  }
+
+  /* Contenedor para manejar la proporción del iframe */
+  .map-placeholder iframe {
+    display: block;
+    width: 100%;
+    /* Usamos aspect-ratio para que el mapa mantenga una proporción sin altura fija */
+    aspect-ratio: 16 / 9;
+    min-height: 350px; /* Altura mínima para que se vea bien */
+  }
+
+  .section-title {
+    margin: 50px 0 0 0;
+  }
+  /* ------------------------------------------------ */
+  /* RESPONSIVO (Tabletas y Móviles)                  */
+  /* ------------------------------------------------ */
+
+  @media (max-width: 900px) {
+    /* Cambiamos el diseño a una columna apilada en pantallas medianas */
+    .location-grid {
+      /* CLAVE: Una sola columna que ocupa todo el ancho */
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .location-info {
+      text-align: center; /* Centramos la información en móvil */
+      padding: 20px 15px;
+    }
+
+    .location-info ul {
+      text-align: center;
+    }
+
+    .map-placeholder iframe {
+      /* Aseguramos que el mapa sea más alto en la vista de una sola columna */
+      min-height: 400px;
+	  min-width: 200px;
+    }
+
+	section {
+    margin-top: 30px;
+  }
+  }
+
+  /* Móviles pequeños */
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 2em;
+    }
+    .section {
+      padding: 20px 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

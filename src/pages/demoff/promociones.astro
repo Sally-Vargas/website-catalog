@@ -13,9 +13,7 @@ const img = {
 <DemoFFLayout title="Promociones">
   <main>
     <section class="section container">
-      <h1 class="section-title">
-        Todas Nuestras Promociones
-      </h1>
+      <h1 class="section-title">Todas Nuestras Promociones</h1>
       <div class="grid">
         <img src={img.hamburgesa} alt="Promoción 1" />
         <img src={img.papas} alt="Promoción 2" />
@@ -23,15 +21,15 @@ const img = {
         <img src={img.hamburgesaCPapas} alt="Promoción 4" />
         <img src={img.aguacate} alt="Promoción 5" />
         <img src={img.papas} alt="Promoción 6" />
-		<img src={img.hamburgesa} alt="Promoción 7" />
-		<img src={img.soda} alt="Promoción 8" />
+        <img src={img.hamburgesa} alt="Promoción 7" />
+        <img src={img.soda} alt="Promoción 8" />
       </div>
     </section>
   </main>
 </DemoFFLayout>
 
 <style>
-  .grid {
+  /* .grid {
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
@@ -44,5 +42,65 @@ const img = {
     object-fit: cover;
     display: block;
 	border-radius: 8px;
+  } */
+
+  section{
+    margin-top: 30px;
+  }
+
+  .grid img {
+    /* La imagen ocupará todo el ancho de su celda */
+    width: 100%;
+
+    /* CLAVE: Mantiene la proporción 1:1 (cuadrada) sin importar la altura */
+    aspect-ratio: 1 / 1;
+
+    /* Asegura que la imagen llene la celda sin deformarse, recortando si es necesario */
+    object-fit: cover;
+
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .grid img:hover {
+    transform: scale(1.03); /* Efecto sutil al pasar el cursor */
+  }
+
+  /* ------------------------------------------------ */
+  /* MEDIA QUERY PARA MÓVILES (Pantallas <= 600px)    */
+  /* ------------------------------------------------ */
+  @media (max-width: 600px) {
+    .section-title {
+      font-size: 2em;
+      /* margin-bottom: 30px; */
+      margin: 50px 2px 30px;
+    }
+
+    .grid {
+      /* Forzamos 2 columnas en pantallas pequeñas */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 0 15px;
+    }
+
+    /* En el móvil, hacemos que el tamaño mínimo de la columna sea más pequeño */
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .grid img {
+      min-width: 200px;
+    }
+  }
+
+  /* Media Query para pantallas muy pequeñas (Ej: smartphones en vertical) */
+  @media (max-width: 380px) {
+    .grid {
+      /* Una sola columna para evitar que las imágenes sean diminutas */
+      grid-template-columns: 1fr;
+      padding: 0 15px;
+    }
   }
 </style>
