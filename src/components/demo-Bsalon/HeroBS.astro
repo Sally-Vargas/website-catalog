@@ -2,6 +2,12 @@
 import { Image } from "astro:assets";
 import heroImage from "./BSImg/hero.jpg";
 import ButtonBs from "./ButtonBs.astro";
+
+const hero = {
+  title: "Tu Estilo, Nuestra Pasión.",
+  paragraph:"Expertos en cabello que transforman tu look y realzan tu belleza natural."
+}
+
 ---
 
 <section class="hero" id="hero">
@@ -16,9 +22,8 @@ import ButtonBs from "./ButtonBs.astro";
   />
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1>Tu Estilo, Nuestra Pasión.</h1>
-    <p>
-      Expertos en cabello que transforman tu look y realzan tu belleza natural.</p>
+    <h1>{hero.title}</h1>
+    <p>{hero.paragraph}</p>
     <ButtonBs text="Agenda tu Cita" href="#contacto" type="white"/>
   </div>
 </section>

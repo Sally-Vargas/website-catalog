@@ -26,26 +26,10 @@ const content = {
 </section>
 
 <style>
-  /* Variables de ejemplo (asumo que están definidas) */
-  :root {
-    --text-light: #f0f0f0;
-    --accent-gold: #f6bd60;
-  }
-
-  /* ------------------------------------------------ */
-  /* ESTILOS BASE (Fluidez y Fondo)                   */
-  /* ------------------------------------------------ */
   .banner {
-    /* CLAVE: Reemplazamos 'height: 50vh;' por padding vertical. 
-           Esto asegura que el banner tenga buen espacio en escritorio, 
-           pero se adaptará si el texto ocupa más líneas en móvil. */
+    position: relative; /* 1. Contenedor para elementos absolutos */
+    overflow: hidden; /* 2. Evita desbordamientos */
     padding: 80px 20px;
-
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("/assets/BSImg/banner.jpg");
-    background-size: cover;
-    background-position: center;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,7 +37,25 @@ const content = {
     color: var(--text-light);
   }
 
+  .banner-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
   .banner-content {
+    position: relative; /* 3. Asegura que el contenido esté por encima del overlay */
+    z-index: 1;
     max-width: 900px; /* Limitar el ancho del contenido para mejor lectura */
     width: 100%;
   }
