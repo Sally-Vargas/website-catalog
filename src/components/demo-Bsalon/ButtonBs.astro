@@ -1,0 +1,43 @@
+---
+export type TButtonBsProps = { text: string; href?: string; type?: "white" | "black-filled" };
+type Props = TButtonBsProps;
+
+const { text = "Agenda tu Cita", href, type = "white" } = Astro.props;
+const typeBtn = {
+  white: "btn-white",
+  "black-filled": "btn-secondary",
+};
+const btnClass = typeBtn[type] ?? typeBtn.white;
+---
+
+<a href={href} class={`btn ${btnClass}`}>{text}</a>
+<style>
+  .btn-white {
+    background-color: transparent;
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
+  }
+  .btn-white:hover {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+  }
+  .btn {
+    padding: 12px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+  }
+  .btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+  }
+</style>

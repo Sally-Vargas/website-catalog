@@ -1,9 +1,18 @@
 ---
-import "../../styles/beautySalon.css";
+const copy = "2025 DEMO Beauty Salon. Todos los derechos reservados.";
 ---
 
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2025 DEMO Beauty Salon. Todos los derechos reservados.</p>
+    {copy && <p>&copy; {copy}</p>}
   </div>
 </footer>
+<style>
+  /* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 20px 0;
+}
+</style>

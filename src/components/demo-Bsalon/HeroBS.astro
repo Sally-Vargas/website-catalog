@@ -1,13 +1,76 @@
 ---
-import "../../styles/beautySalon.css";
+import { Image } from "astro:assets";
+import heroImage from "./BSImg/hero.jpg";
+import ButtonBs from "./ButtonBs.astro";
 ---
 
 <section class="hero" id="hero">
+  <Image
+    src={heroImage}
+    alt="Mujer con cabello estilizado en un salón de belleza"
+    widths={[480, 768, 1280, 1920]}
+    sizes="100vw"
+    quality="mid"
+    loading="eager"
+    class="hero-bg-image"
+  />
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1>Tu Estilo, Nuestra Pasión.</h1>
     <p>
-      Expertos en cabello que transforman tu look y realzan tu belleza natural.
-    </p>
-    <a href="#contacto" class="btn">Agenda tu Cita</a>
+      Expertos en cabello que transforman tu look y realzan tu belleza natural.</p>
+    <ButtonBs text="Agenda tu Cita" href="#contacto" type="white"/>
   </div>
 </section>
+<style>
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    overflow: hidden; /* Asegura que nada se desborde */
+  }
+
+  .hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .hero-content {
+    position: relative; /* Asegura que el contenido esté sobre el overlay */
+    z-index: 1;
+  }
+
+  .hero-content h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    color: #f6bd60;
+  }
+
+  .hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5em;
+    }
+  }
+</style>

@@ -1,5 +1,25 @@
 ---
-import "../../styles/beautySalon.css";
+import { Image } from "astro:assets";
+// 1. Importa las imágenes desde la carpeta `src`
+import img1 from "./BSImg/img-reference/E-1.jpg";
+import img2 from "./BSImg/img-reference/E-2.jpg";
+import img3 from "./BSImg/img-reference/E-3.jpg";
+import img4 from "./BSImg/img-reference/E-4.jpg";
+import img5 from "./BSImg/img-reference/E-5.jpg";
+import img6 from "./BSImg/img-reference/E-6.jpg";
+
+// 2. Crea un array con los datos de las imágenes únicas
+const galleryImages = [
+  { src: img1, alt: "Trabajo de salón 1" },
+  { src: img2, alt: "Trabajo de salón 2" },
+  { src: img3, alt: "Trabajo de salón 3" },
+  { src: img4, alt: "Trabajo de salón 4" },
+  { src: img5, alt: "Trabajo de salón 5" },
+  { src: img6, alt: "Trabajo de salón 6" },
+];
+
+// 3. Duplica el array para lograr el efecto de carrusel infinito
+const carouselImages = [...galleryImages, ...galleryImages];
 ---
 
 <section class="gallery section" id="galeria">
@@ -7,18 +27,18 @@ import "../../styles/beautySalon.css";
     <h2 class="section-title">Nuestra Galería</h2>
     <div class="carousel-container">
       <div class="carousel-track">
-        <img src="/assets/img/BSImg/img-reference/E-1.jpg" alt="Trabajo 1" />
-        <img src="/assets/img/BSImg/img-reference/E-2.jpg" alt="Trabajo 2" />
-        <img src="/assets/img/BSImg/img-reference/E-3.jpg" alt="Trabajo 3" />
-        <img src="/assets/img/BSImg/img-reference/E-4.jpg" alt="Trabajo 4" />
-        <img src="/assets/img/BSImg/img-reference/E-5.jpg" alt="Trabajo 5" />
-        <img src="/assets/img/BSImg/img-reference/E-6.jpg" alt="Trabajo 6" />
-        <img src="/assets/img/BSImg/img-reference/E-1.jpg" alt="Trabajo 1" />
-        <img src="/assets/img/BSImg/img-reference/E-2.jpg" alt="Trabajo 2" />
-        <img src="/assets/img/BSImg/img-reference/E-3.jpg" alt="Trabajo 3" />
-        <img src="/assets/img/BSImg/img-reference/E-4.jpg" alt="Trabajo 4" />
-        <img src="/assets/img/BSImg/img-reference/E-5.jpg" alt="Trabajo 5" />
-        <img src="/assets/img/BSImg/img-reference/E-6.jpg" alt="Trabajo 6" />
+        {
+          carouselImages.map((image, index) => (
+            <Image
+              src={image.src}
+              alt={image.alt}
+              widths={[150, 250, 500]}
+              sizes="(max-width: 768px) 150px, 250px"
+              loading={index < 6 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          ))
+        }
       </div>
     </div>
   </div>

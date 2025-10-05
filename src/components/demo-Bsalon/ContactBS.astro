@@ -1,21 +1,66 @@
 ---
-import "../../styles/beautySalon.css";
+import ButtonBs, { type TButtonBsProps } from "./ButtonBs.astro";
+
+type TInfokeys = "address" | "phone" | "hours";
+const texts: Record<TInfokeys | "title", string>= {
+  title: "Contáctanos",
+  address: "Dirección",
+  phone: "Teléfono",
+  hours: "Horario de Atención",
+}
+const info: Record<TInfokeys, string>= {
+  address: "Av. Principal #123, Ciudad Ejemplo",
+  phone: "+52 55 1234 5678",
+  hours: "Mar - Sáb, 10:00 AM - 7:00 PM",
+}
+const btn:TButtonBsProps = {
+  text: "Enviar un Mensaje",
+  type: "black-filled",
+  href: "#",
+}
 ---
 
 <section class="contact section" id="contacto">
   <div class="container">
-    <h2 class="section-title">Contáctanos</h2>
-    <div class="contact-info">
-      <p>
-        <strong>Dirección:</strong> Av. Principal #123, Ciudad Ejemplo
-      </p>
-      <p><strong>Teléfono:</strong> +52 55 1234 5678</p>
-      <p><strong>Horario:</strong> Mar - Sáb, 10:00 AM - 7:00 PM</p>
+    <h2 class="section-title">{texts.title}</h2>
+    <div class="contact-info"> 
+      {Object.entries(info).map(([key, value]) => (
+        <p >
+          <strong>{texts[key as TInfokeys]}</strong> {value}
+        </p>
+      ))}
       <div class="btn-mesage">
-        <a href="#" class="btn-secondary">Enviar un Mensaje</a>
+        <ButtonBs {...btn} />
       </div>
     </div>
     <!-- <div class="map-placeholder">
                     </div> -->
   </div>
 </section>
+<style>
+  /* Contacto */
+  .contact .container {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 40px; */
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-info {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .contact-info p {
+    margin: 10px 0;
+  }
+  .btn-mesage {
+    margin-top: 3rem;
+  }
+  @media (max-width: 768px) {
+    .contact .container {
+    flex-direction: column;
+  }
+  }
+</style>

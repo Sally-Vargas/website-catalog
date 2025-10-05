@@ -1,54 +1,111 @@
 ---
-import "../../styles/beautySalon.css";
+import { Image } from "astro:assets";
+// Importa las imágenes desde la carpeta `src`
+import corteImg from "./BSImg/corte.jpg";
+import tinteImg from "./BSImg/tinte.jpg";
+import tratamientoImg from "./BSImg/tratamiento.jpg";
+import depilacionImg from "./BSImg/depilacion.jpg";
+import peinadosImg from "./BSImg/peinados.jpg";
+import maquillajeImg from "./BSImg/maquillaje.jpg";
+import cejasPestanasImg from "./BSImg/cejas-pestañas.jpg";
+import unasImg from "./BSImg/uñas.jpg";
+
+const servicesData = [
+  {
+    img: corteImg,
+    alt: "Corte de cabello",
+    title: "Corte",
+    description: "Dama, caballero, niños.",
+  },
+  {
+    img: tinteImg,
+    alt: "Coloración de cabello",
+    title: "Coloración",
+    description:
+      "Tinte, retoque, alta y media decoloración, mechas, balayage, highlights.",
+  },
+  {
+    img: tratamientoImg,
+    alt: "Tratamientos Capilares",
+    title: "Tratamientos",
+    description: "Hidratación y reparación, keratina, botox capilar.",
+  },
+  {
+    img: depilacionImg,
+    alt: "Depilación facial",
+    title: "Depilación",
+    description: "Facial, ceja, bozo.",
+  },
+  {
+    img: peinadosImg,
+    alt: "Peinado para eventos",
+    title: "Peinado",
+    description:
+      "Alaciado, curly, recogido, semirecogido, eventos, bodas, fiestas.",
+  },
+  {
+    img: maquillajeImg,
+    alt: "Maquillaje profesional",
+    title: "Maquillaje profesional",
+    description: "Para eventos, novias, etc.",
+  },
+  {
+    img: cejasPestanasImg,
+    alt: "Diseño de cejas y pestañas",
+    title: "Cejas y pestañas",
+    description: "Diseño, microblading, lifting, extensiones.",
+  },
+  {
+    img: unasImg,
+    alt: "Manicure y pedicure",
+    title: "Uñas",
+    description: "Manicure, pedicure, uñas acrílicas, gelish, personalizados.",
+  },
+];
 ---
 
 <section class="services section" id="servicios">
   <div class="container">
     <h2 class="section-title">Nuestros Servicios</h2>
     <div class="services-grid">
-      <div class="service-item">
-        <img src="/assets/img/BSImg/corte.jpg" alt="Corte" />
-        <h3>Corte</h3>
-        <p>Dama, caballero, niños.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/tinte.jpg" alt="Coloración" />
-        <h3>Coloración</h3>
-        <p>
-          Tinte, retoque, alta y media decoloración, mechas, balayage,
-          highlights.
-        </p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/tratamiento.jpg" alt="Tratamientos Capilares" />
-        <h3>Tratamientos</h3>
-        <p>Hidratación y reparación, keratina, botox capilar.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/depilacion.jpg" alt="Depilación" />
-        <h3>Depilación</h3>
-        <p>Facial, ceja, bozo.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/peinados.jpg" alt="Peinado" />
-        <h3>Peinado</h3>
-        <p>Alaciado, curly, recogido, semirecogido, eventos, bodas, fiestas.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/maquillaje.jpg" alt="Maquillaje" />
-        <h3>Maquillaje profesional</h3>
-        <p>Para eventos, novias, etc.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/cejas-pestañas.jpg" alt="Cejas y pestañas" />
-        <h3>Cejas y pestañas</h3>
-        <p>Diseño, microblading, lifting, extensiones.</p>
-      </div>
-      <div class="service-item">
-        <img src="/assets/img/BSImg/uñas.jpg" alt="Uñas" />
-        <h3>Uñas</h3>
-        <p>Manicure, pedicure, uñas acrílicas, gelish, personalizados.</p>
-      </div>
+      {
+        servicesData.map((service) => (
+          <div class="service-item">
+            <Image
+              src={service.img}
+              alt={service.alt}
+              width={300}
+              height={200}
+              widths={[400, 800]}
+              sizes="(max-width: 1024px) 90vw, 40vw"
+            />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
+
+<style>
+  .services-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.services-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.services-grid h3 {
+  color: #f28482;
+}
+  .service-item :global(img) {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+</style>

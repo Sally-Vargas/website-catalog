@@ -1,17 +1,75 @@
 ---
-import "../../styles/beautySalon.css";
+import { Image } from "astro:assets";
+import bannerImage from "./BSImg/banner.jpg";
+
+const content = {
+  title: "La belleza comienza en el momento en que decides cuidarte.",
+  paragraph:
+    "En nuestro salón de belleza nos especializamos en resaltar lo mejor de ti. Desde cortes modernos y coloración profesional, hasta tratamientos capilares, maquillaje y cuidado de uñas, ofrecemos una experiencia completa para que te sientas segura, radiante y única. Porque la verdadera belleza está en los detalles, y nuestro objetivo es que cada visita sea un momento para consentirte.",
+};
 ---
 
 <section class="banner" id="banner">
+  <Image
+    src={bannerImage}
+    alt="Banner de fondo con productos de belleza y maquillaje"
+    widths={[480, 768, 1280, 1920]}
+    sizes="100vw"
+    quality="mid"
+    class="banner-bg-image"
+  />
+  <div class="banner-overlay"></div>
   <div class="banner-content">
-    <h1>La belleza comienza en el momento en que decides cuidarte.</h1>
-    <p>
-      En nuestro salón de belleza nos especializamos en resaltar lo mejor de ti.
-      Desde cortes modernos y coloración profesional, hasta tratamientos
-      capilares, maquillaje y cuidado de uñas, ofrecemos una experiencia
-      completa para que te sientas segura, radiante y única. Porque la verdadera
-      belleza está en los detalles, y nuestro objetivo es que cada visita sea un
-      momento para consentirte.
-    </p>
+    <h1>{content.title}</h1>
+    <p>{content.paragraph}</p>
   </div>
 </section>
+<style>
+  /*Banner*/
+  .banner {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    overflow: hidden;
+  }
+
+  .banner-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .banner-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .banner-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .banner-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    color: #f6bd60;
+  }
+
+  .banner-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 900px; /* Limita el ancho del párrafo para mejor legibilidad */
+    padding: 0 20px;
+  }
+</style>
