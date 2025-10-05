@@ -1,0 +1,66 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+  title?: string;
+}
+
+const { href = '/', class: className = '', title = '' } = Astro.props;
+---
+
+<a href={href} title={title} class={`home-button ${className}`}>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    stroke-width="2" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+  </svg>
+  <!-- <span class="sr-only">{title}</span> -->
+</a>
+
+<style>
+  .home-button {
+    /* Reseteo y base del botón */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%; /* Lo hace redondo */
+    background-color: #333; /* Fondo oscuro por defecto */
+    color: white; /* Color del icono */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Quitar subrayado del enlace */
+  }
+
+  .home-button:hover {
+    background-color: #555; /* Oscurecer al pasar el ratón */
+    transform: scale(1.05);
+  }
+
+  .home-button svg {
+    width: 24px; /* Tamaño base del icono */
+    height: 24px;
+    display: block;
+  }
+
+  /* Clase de accesibilidad para ocultar texto visualmente pero mantenerlo para lectores de pantalla */
+  /* .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  } */
+</style>

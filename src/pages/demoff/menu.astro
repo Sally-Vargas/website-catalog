@@ -1,61 +1,77 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Card from '../../components/demoFF/Card.astro';
+import DemoFFLayout from '../../layouts/DemoFFLayout.astro';
+const mainPath = "/assets/fastFood"
+const img = {
+	hamburgesa:`${mainPath}/img/hamburguesa.jpg`,
+	hamburgesaCPapas:`${mainPath}/img/hamburguesa-papas.jpg`,
+	papas:`${mainPath}/img/papas.jpg`,
+	soda:`${mainPath}/img/refresco.jpg`,
+	aguacate:`${mainPath}/img/aguacate.jpg`
+}
 ---
 
-<Layout title="Menú Completo">
+<DemoFFLayout title="Menú Completo">
 	<main>
 		<section class="section container">
-			<h1 class="section-title" style="margin-top: 100px;">Nuestro Menú</h1>
-			<h2 style="color: var(--accent-yellow); margin-bottom: 20px;">Hamburguesas</h2>
+			<h1 class="section-title">Nuestro Menú</h1>
+			<h2>Hamburguesas</h2>
 			<div class="grid">
 				<Card 
 					title="Hamburguesa BBQ"
 					description="Salsa BBQ ahumada, queso cheddar, tocino y aros de cebolla."
 					price="$89.50"
-					imgSrc="/assets/img/hamburguesa.jpg"
+					imgSrc={img.hamburgesa}
 					altText="Hamburguesa BBQ"
 				/>
 				<Card 
 					title="Hamburguesa Doble"
 					description="Doble carne, doble queso, lechuga, tomate y salsa especial."
 					price="$100.00"
-					imgSrc="/assets/img/hamburguesa.jpg"
+					imgSrc={img.hamburgesa}
 					altText="Hamburguesa doble"
 				/>
 				<Card 
 					title="Hamburguesa Vegetariana"
 					description="Deliciosa hamburguesa a base de plantas con aguacate."
 					price="$75.00"
-					imgSrc="/assets/img/hamburguesa.jpg"
+					imgSrc={img.hamburgesa}
 					altText="Hamburguesa vegetariana"
 				/>
 			</div>
 
-			<h2 style="color: var(--accent-yellow); margin-top: 50px; margin-bottom: 20px;">Complementos</h2>
+			<h2>Complementos</h2>
 			<div class="grid">
 				<Card 
 					title="Aros de Cebolla"
 					description="Crujientes aros de cebolla dorados a la perfección."
 					price="$30.00"
-					imgSrc="/assets/img/papas.jpg"
+					imgSrc={img.papas}
 					altText="Aros de cebolla"
 				/>
 				<Card 
 					title="Nuggets de Pollo"
 					description="Tiernos trozos de pollo empanizado, ideales para compartir."
 					price="$45.50"
-					imgSrc="/assets/img/papas.jpg"
+					imgSrc={img.papas}
 					altText="Nuggets de pollo"
 				/>
 				<Card 
 					title="Malteada"
 					description="Malteada de chocolate, fresa o vainilla."
 					price="$40.00"
-					imgSrc="/assets/img/papas.jpg"
+					imgSrc={img.papas}
 					altText="Malteada"
 				/>
 			</div>
 			</section>
 	</main>
-</Layout>
+</Dem>
+
+<style>
+	h2{
+		color: var(--accent-yellow); 
+		margin-top: 50px;
+		margin-bottom: 20px;
+	}
+</style>
