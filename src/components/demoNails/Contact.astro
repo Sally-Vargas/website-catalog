@@ -1,0 +1,127 @@
+---
+const contact = {
+    title: '¿Quieres agendar una cita?',
+    subtitle: 'Elige el servicio, la fecha y la hora que más te convenga.',
+}
+const contactUs = {
+    title: 'Contáctanos',
+    address: 'Calle Ejemplo #123, Col. Centro, Ciudad',
+    phone: '(555) 123 4567',
+    email: 'contacto@ejemplo.com',
+    whatsapp: 'https://wa.me/5215551234567',
+}
+---
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="contact-content">
+            <h2 class="section-title fade-in">{contact.title}</h2>
+            <p class="fade-in">{contact.subtitle}</p>
+            <section class="contacto">
+                <h2>{contactUs.title}</h2>
+                <p>📍 Dirección: {contactUs.address}</p>
+                <p>📞 Teléfono: {contactUs.phone}</p>
+                <p>📧 Correo: {contactUs.email}</p>
+                
+                <a href={contactUs.whatsapp} target="_blank" class="btn-whatsapp">
+                Escríbenos por WhatsApp 💬 
+                </a>
+            </section>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Contact Section */
+.contact {
+    background: linear-gradient(135deg, #3b4cb8 0%, #4a2c65 50%, #9c35a8 100%);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="contact-grid" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23contact-grid)"/></svg>');
+    animation: contactFloat 30s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.contact::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+    animation: contactPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes contactPulse {
+    0% { opacity: 0.4; }
+    100% { opacity: 0.7; }
+}
+
+.contact-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.contact .section-title {
+    color: var(--text-light);
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contacto {
+  text-align: center;
+  padding: 40px 20px;
+  /* background: var(--primary-color); */
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+  /* border-top: 2px solid #eee; */
+  margin-top: 2rem;
+}
+
+.contacto h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+.contacto p {
+  font-size: 1rem;
+  margin: 5px 0;
+  margin-bottom: 20px;
+  color: var(--text-light);
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: #25D366;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5d;
+}
+</style>

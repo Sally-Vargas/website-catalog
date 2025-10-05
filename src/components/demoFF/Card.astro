@@ -1,17 +1,19 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
 	title: string;
 	description: string;
 	price: string;
-	imgSrc: string;
+	img: ImageMetadata;
 	altText: string;
 }
 
-const { title, description, price, imgSrc, altText } = Astro.props;
+const { title, description, price, img, altText } = Astro.props;
 ---
 
 <div class="card">
-	<img src={imgSrc} alt={altText} />
+	<Image src={img} alt={altText} width={400} height={200} />
 	<div class="card-content">
 		<h3 class="card-title">{title}</h3>
 		<p class="card-description">{description}</p>
@@ -31,7 +33,7 @@ const { title, description, price, imgSrc, altText } = Astro.props;
 	.card:hover {
 		transform: translateY(-5px);
 	}
-	.card img {
+	.card :global(img) {
 		width: 100%;
 		height: 200px;
 		object-fit: cover;

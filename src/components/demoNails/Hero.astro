@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import heroBanner from './images/demo/banner-demo-nails.jpg';
+
+const heroData = {
+    subtitle: "Tu estilo empieza en tus manos",
+    title: "Transformamos tus uñas en verdaderas obras de arte. Desde diseños minimalistas hasta estilos atrevidos, tenemos el look perfecto para ti.",
+    cta: { text: "Explora nuestros servicios", href: "#services" }
+};
+---
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <Image 
+        src={heroBanner} 
+        alt="Banner de fondo con uñas decoradas" 
+        widths={[480, 768, 1280, 1920]}
+        sizes="100vw"
+        quality="mid" 
+        class="hero-background-image" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-subtitle">{heroData.subtitle}</div>
+        <h2>{heroData.title}</h2>
+        <a href={heroData.cta.href} class="cta-button">{heroData.cta.text}</a>
+    </div>
+</section>
+
+<style>
+/* Hero Section */
+.hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+    z-index: 1;
+}
+
+.hero-content {
+    text-align: center;
+    color: var(--text-light);
+    z-index: 2;
+    position: relative;
+    max-width: 900px;
+    padding: 0 2rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.2s forwards;
+    margin-bottom: 1rem;
+    color: rgba(53, 15, 15, 0.8);
+}
+
+.hero h2 { /* Adjusted from h1 to h2 to match the HTML */
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.4s forwards;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.hero .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease 0.6s forwards;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.8s forwards;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    letter-spacing: 0.5px;
+    margin-top: 20px;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h2 { /* Adjusted from h1 */
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 { /* Adjusted from h1 */
+        font-size: 2.5rem;
+    }
+}
+</style>

@@ -3,14 +3,12 @@ import Layout from '../../layouts/DemoFFLayout.astro';
 import Card from '../../components/demoFF/Card.astro';
 import Carrusel from '../../components/demoFF/Carrusel.astro';
 import Hero from '../../components/demoFF/Hero.astro';
-const mainPath = "/assets/fastFood"
-const img = {
-	hamburgesa:`${mainPath}/img/hamburguesa.jpg`,
-	hamburgesaCPapas:`${mainPath}/img/hamburguesa-papas.jpg`,
-	papas:`${mainPath}/img/papas.jpg`,
-	soda:`${mainPath}/img/refresco.jpg`,
-	aguacate:`${mainPath}/img/aguacate.jpg`
-}
+
+import hamburgesa from '../../components/demoFF/img/hamburguesa.jpg'
+import hamburgesaCPapas from '../../components/demoFF/img/hamburguesa-papas.jpg';
+import papas from '../../components/demoFF/img/papas.jpg';
+import soda from '../../components/demoFF/img/refresco.jpg';
+import aguacate from '../../components/demoFF/img/aguacate.jpg';
 ---
 
 <Layout title="Fast Burger - Inicio">
@@ -24,21 +22,21 @@ const img = {
 					title="Hamburguesa Clásica"
 					description="Nuestra receta original con carne 100% de res, lechuga y tomate."
 					price="$79.99"
-					imgSrc={img.hamburgesa}
+					img={hamburgesa}
 					altText="Hamburguesa clásica"
 				/>
 				<Card 
 					title="Papas Fritas"
 					description="Crujientes y doradas, el acompañamiento perfecto."
 					price="$25.50"
-					imgSrc={img.papas}
+					img={papas}
 					altText="Papas fritas"
 				/>
 				<Card 
 					title="Refresco Grande"
 					description="Elige tu sabor favorito de nuestra barra de refrescos."
 					price="$30.00"
-					imgSrc={img.soda}
+					img={soda}
 					altText="Refresco grande"
 				/>
 			</div>
@@ -53,21 +51,21 @@ const img = {
 					title="Hamburguesa de Pollo"
 					description="Pechuga de pollo empanizada y aderezos especiales."
 					price="$65.50"
-					imgSrc={img.hamburgesa}
+					img={hamburgesa}
 					altText="Hamburguesa de pollo"
 				/>
 				<Card 
 					title="Burrito"
 					description="Carne asada, frijoles y guacamole en una tortilla de harina."
 					price="$80.00"
-					imgSrc={img.aguacate}
+					img={aguacate}
 					altText="Burrito"
 				/>
 				<Card 
 					title="Pizza Personal"
 					description="Deliciosa pizza de pepperoni con mucho queso y salsa."
 					price="$59.99"
-					imgSrc={img.hamburgesaCPapas}
+					img={hamburgesaCPapas}
 					altText="Pizza personal"
 				/>
 			</div>
@@ -77,4 +75,3 @@ const img = {
 		</section>
 	</main>
 </Layout>
-
