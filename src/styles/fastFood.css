@@ -39,14 +39,13 @@ a {
 }
 
 .section {
-	padding: 80px 0;
+	padding: 30px 0;
 }
 
 .section-title {
 	text-align: center;
 	font-size: 3em;
-	margin-bottom: 50px;
-	margin-top: 50px;
+	margin: 50px 0;
 }
 
 .btn {

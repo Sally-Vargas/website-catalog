@@ -29,9 +29,11 @@ const { title, description, price, img, altText } = Astro.props;
 		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 		text-align: center;
 		transition: transform 0.3s ease;
+		height: 100%; /* Asegura que todas las tarjetas tengan la misma altura dentro de un grid */
 	}
 	.card:hover {
 		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 	}
 	.card :global(img) {
 		width: 100%;
@@ -47,13 +49,71 @@ const { title, description, price, img, altText } = Astro.props;
 		margin-bottom: 5px;
 	}
 	.card-description {
+		/* color: var(--accent-yellow);
+		font-size: 0.9em;
+		margin-bottom: 15px; */
 		color: var(--accent-yellow);
 		font-size: 0.9em;
 		margin-bottom: 15px;
+		/* Ajuste sutil: limita la altura del texto de descripción si es demasiado largo */
+		display: -webkit-box;
+		-webkit-line-clamp: 3; /* Limita a 3 líneas */
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 	.card-price {
 		font-family: 'Bebas Neue', sans-serif;
 		color: var(--text-white);
 		font-size: 1.8em;
+	}
+
+	@media (max-width: 768px) {
+		.card{
+			margin: 0 15px;
+		}
+		
+		.card img {
+			/* Reducimos la altura de la imagen para que ocupe menos espacio vertical */
+			height: 180px;
+		}
+
+		.card-title {
+			font-size: 1.4em;
+		}
+
+		.card-price {
+			font-size: 1.7em;
+		}
+	}
+
+	/* ------------------------------------------------ */
+	/* MEDIA QUERY: Móviles pequeños (<= 480px) */
+	/* ------------------------------------------------ */
+	@media (max-width: 480px) {
+		.card{
+			margin: 0 15px;
+		}
+
+		.card img {
+			/* Reducimos aún más la altura para pantallas pequeñas */
+			height: 150px; 
+		}
+
+		.card-content {
+			padding: 15px;
+		}
+
+		.card-title {
+			font-size: 1.2em; /* Texto más pequeño para caber mejor */
+		}
+
+		.card-description {
+			font-size: 0.85em;
+			margin-bottom: 10px;
+		}
+
+		.card-price {
+			font-size: 1.5em; /* Precio más discreto */
+		}
 	}
 </style>

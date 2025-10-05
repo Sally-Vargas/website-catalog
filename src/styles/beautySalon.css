@@ -1,0 +1,348 @@
+:root {
+  --primary-color: #2c2c2c;
+  --secondary-color: #f5f5f5;
+  --accent-color: #a0a0a0;
+  --text-light: #f5f5f5;
+  --text-dark: #333;
+  --section-tittle: #450920;
+}
+
+/* Tipografía de Google Fonts */
+body {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 50px;
+  color: var(--section-tittle);
+}
+
+/* Header y Navegación */
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 20px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8em;
+  color: var(--text-light);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+nav {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-light);
+  transition: transform 0.3s;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/BSImg/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.hero-content h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+  color: #f6bd60;
+}
+
+.hero-content p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background-color: transparent;
+  border: 2px solid var(--text-light);
+  color: var(--text-light);
+  padding: 12px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  color: var(--text-light);
+  padding: 12px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: background-color 0.3s;
+}
+
+/* Secciones */
+.services-grid,
+.team-grid,
+.gallery-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.services-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.services-grid h3 {
+  color: #f28482;
+}
+
+.service-item,
+.team-member {
+  text-align: center;
+  background-color: #f8edeb;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.service-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.service-item:hover {
+  transform: scale(1.05);
+}
+
+/*Banner*/
+/* .banner {
+  height: 50vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/BSImg/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.banner-content h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+  color: #f6bd60;
+}
+
+.banner-content p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+} */
+
+/* Estilos para el Carrusel de Imágenes */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-track {
+  display: flex;
+  width: calc(250px * 12);
+  animation: scroll 30s linear infinite;
+}
+
+.carousel-track img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Define la animación de desplazamiento */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 6));
+  }
+}
+
+/* Media Query para móviles: Ajusta el tamaño de las imágenes del carrusel */
+@media (max-width: 768px) {
+  .carousel-track img {
+    width: 150px;
+    height: 150px;
+  }
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-150px * 6));
+    }
+  }
+}
+
+/* Contacto */
+.contact .container {
+  /* display: flex;
+    flex-wrap: wrap;
+    gap: 40px; */
+  align-items: center;
+  text-align: center;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-info p {
+  margin: 10px 0;
+}
+
+.btn-mesage {
+  margin-top: 3rem;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+  .header .container {
+    flex-direction: column;
+  }
+  .nav {
+    display: none;
+    width: 100%;
+    text-align: center;
+  }
+  .nav.active {
+    display: block;
+  }
+  .nav-list {
+    flex-direction: column;
+  }
+  .nav-link {
+    display: block;
+    padding: 15px;
+  }
+  .menu-toggle {
+    display: flex;
+    align-self: flex-end;
+  }
+  .hero-content h1 {
+    font-size: 2.5em;
+  }
+
+  .logo{
+    font-size: 1.5rem;
+  }
+  .section {
+    padding: 60px 0;
+  }
+  .section-title {
+    font-size: 2em;
+  }
+  .contact .container {
+    flex-direction: column;
+  }
+}

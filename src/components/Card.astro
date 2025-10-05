@@ -3,86 +3,104 @@ interface Props {
   title: string;
   image: string;
   description: string;
-  link:string;
+  link: string;
 }
 
 const { title, image, description, link } = Astro.props;
 ---
 
 <div class="card">
-	<div class="card-left">
-		<img src={image} />
-	</div>
-	<div class="card-right">
-		<div class="card-content">
-			<h3>{title}</h3>
-			<p>{description}</p>
-			<a href={link}>Ver Detalles</a>
-		</div>
-	</div>
+  <div class="card-left">
+    <img src={image} />
+  </div>
+  <div class="card-right">
+    <div class="card-content">
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <a href={link}>Ver Detalles</a>
+    </div>
+  </div>
 </div>
 
 <style>
-    :root {
+  :root {
     --bg: #5e548e;
     --box-color: #9d8dbe;
     --dark-box-color: #2b254a;
     --text-white: #f0f0f0;
+  }
+
+  .card {
+    display: flex;
+    background-color: #eee;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 800px;
+    height: 300px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  .card-left {
+    flex: 1;
+  }
+  .card-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-right {
+    flex: 1;
+    background-color: var(--box-color);
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card-content {
+    text-align: center;
+  }
+  .card-content h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .card-content p {
+    margin-bottom: 20px;
+  }
+  .card-content a {
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .card-content a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  @media (max-width: 768px) {
+    .card {
+      flex-direction: column;
+      max-width: 100%;
+      height: auto;
     }
-    
-	.card {
-		display: flex;
-		background-color: #eee;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
-		overflow: hidden;
-		max-width: 800px;
-		margin: 0 auto;
-	}
-	.card-left {
-		flex: 1;
-	}
-	.card-left img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-	.card-right {
-		flex: 1;
-		background-color: var(--box-color);
-		color: var(--text-white);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 20px;
-	}
-	.card-content {
-		text-align: center;
-	}
-	.card-content h3 {
-		font-size: 2em;
-		margin-bottom: 10px;
-	}
-	.card-content p {
-		margin-bottom: 20px;
-	}
-	.card-content a {
-		color: var(--text-white);
-		border: 2px solid var(--text-white);
-		padding: 10px 20px;
-		border-radius: 5px;
-		text-decoration: none;
-		transition: background-color 0.3s ease;
-	}
-	.card-content a:hover {
-		background-color: rgba(255, 255, 255, 0.2);
-	}
-	@media (max-width: 768px) {
-		.card {
-			flex-direction: column;
-		}
-		.card-left {
-			height: 250px;
-		}
-	}
+
+    .card-left {
+      height: 250px;
+    }
+
+    .card-right {
+      padding: 30px 20px;
+      height: auto;
+    }
+
+    .card-content h3 {
+      font-size: 1.5em;
+    }
+  }
 </style>

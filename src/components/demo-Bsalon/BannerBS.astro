@@ -24,52 +24,85 @@ const content = {
     <p>{content.paragraph}</p>
   </div>
 </section>
+
 <style>
-  /*Banner*/
+  /* Variables de ejemplo (asumo que están definidas) */
+  :root {
+    --text-light: #f0f0f0;
+    --accent-gold: #f6bd60;
+  }
+
+  /* ------------------------------------------------ */
+  /* ESTILOS BASE (Fluidez y Fondo)                   */
+  /* ------------------------------------------------ */
   .banner {
-    position: relative;
-    height: 50vh;
+    /* CLAVE: Reemplazamos 'height: 50vh;' por padding vertical. 
+           Esto asegura que el banner tenga buen espacio en escritorio, 
+           pero se adaptará si el texto ocupa más líneas en móvil. */
+    padding: 80px 20px;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("/assets/BSImg/banner.jpg");
+    background-size: cover;
+    background-position: center;
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--text-light);
-    overflow: hidden;
-  }
-
-  .banner-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-  }
-
-  .banner-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
   }
 
   .banner-content {
-    position: relative;
-    z-index: 1;
+    max-width: 900px; /* Limitar el ancho del contenido para mejor lectura */
+    width: 100%;
   }
 
+  /* ------------------------------------------------ */
+  /* TÍTULO (Escalado Fluido)                         */
+  /* ------------------------------------------------ */
   .banner-content h1 {
-    font-size: 3em;
+    /* CLAVE: Usamos clamp para que el título escale suavemente: 
+           Mínimo (1.8em), Preferido (4vw), Máximo (3em). */
+    font-size: clamp(1.8em, 4vw, 3em);
+
     margin-bottom: 20px;
-    letter-spacing: 3px;
-    color: #f6bd60;
+    /* Reducimos el espaciado de letras en móviles */
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    line-height: 1.2;
   }
 
+  /* ------------------------------------------------ */
+  /* PÁRRAFO (Ajustes de Lectura)                     */
+  /* ------------------------------------------------ */
   .banner-content p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    max-width: 900px; /* Limita el ancho del párrafo para mejor legibilidad */
-    padding: 0 20px;
+    /* Escala la fuente del párrafo */
+    font-size: clamp(1em, 1.5vw, 1.2em);
+    margin-bottom: 0; /* Ya no es necesario 30px, la altura se define con padding */
+    opacity: 0.9; /* Pequeño ajuste para mejor contraste */
+  }
+
+  /* ------------------------------------------------ */
+  /* MEDIA QUERY PARA MÓVILES                         */
+  /* ------------------------------------------------ */
+
+  @media (max-width: 768px) {
+    .banner {
+      /* Aumentamos el padding para dar más respiro visual en vertical */
+      padding: 60px 20px;
+    }
+
+    .banner-content h1 {
+      /* Ajuste final para móviles pequeños */
+      letter-spacing: 1px;
+      font-size: clamp(1.6em, 6vw, 2.5em);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner {
+      padding: 40px 15px; /* Más compacto en pantallas muy pequeñas */
+    }
   }
 </style>

@@ -1,77 +1,141 @@
 ---
-import Card from '../../components/demoFF/Card.astro';
-import DemoFFLayout from '../../layouts/DemoFFLayout.astro';
-const mainPath = "/assets/fastFood"
+import Card from "../../components/demoFF/Card.astro";
+import DemoFFLayout from "../../layouts/DemoFFLayout.astro";
+const mainPath = "/assets/fastFood";
 const img = {
-	hamburgesa:`${mainPath}/img/hamburguesa.jpg`,
-	hamburgesaCPapas:`${mainPath}/img/hamburguesa-papas.jpg`,
-	papas:`${mainPath}/img/papas.jpg`,
-	soda:`${mainPath}/img/refresco.jpg`,
-	aguacate:`${mainPath}/img/aguacate.jpg`
-}
+  hamburgesa: `${mainPath}/img/hamburguesa.jpg`,
+  hamburgesaCPapas: `${mainPath}/img/hamburguesa-papas.jpg`,
+  papas: `${mainPath}/img/papas.jpg`,
+  soda: `${mainPath}/img/refresco.jpg`,
+  aguacate: `${mainPath}/img/aguacate.jpg`,
+};
 ---
 
 <DemoFFLayout title="Menú Completo">
-	<main>
-		<section class="section container">
-			<h1 class="section-title">Nuestro Menú</h1>
-			<h2>Hamburguesas</h2>
-			<div class="grid">
-				<Card 
-					title="Hamburguesa BBQ"
-					description="Salsa BBQ ahumada, queso cheddar, tocino y aros de cebolla."
-					price="$89.50"
-					imgSrc={img.hamburgesa}
-					altText="Hamburguesa BBQ"
-				/>
-				<Card 
-					title="Hamburguesa Doble"
-					description="Doble carne, doble queso, lechuga, tomate y salsa especial."
-					price="$100.00"
-					imgSrc={img.hamburgesa}
-					altText="Hamburguesa doble"
-				/>
-				<Card 
-					title="Hamburguesa Vegetariana"
-					description="Deliciosa hamburguesa a base de plantas con aguacate."
-					price="$75.00"
-					imgSrc={img.hamburgesa}
-					altText="Hamburguesa vegetariana"
-				/>
-			</div>
+  <main>
+    <section class="section container">
+      <h1 class="section-title">Nuestro Menú</h1>
+      <h2>- Hamburguesas -</h2>
+      <div class="grid">
+        <Card
+          title="Hamburguesa BBQ"
+          description="Salsa BBQ ahumada, queso cheddar, tocino y aros de cebolla."
+          price="$89.50"
+          imgSrc={img.hamburgesa}
+          altText="Hamburguesa BBQ"
+        />
+        <Card
+          title="Hamburguesa Doble"
+          description="Doble carne, doble queso, lechuga, tomate y salsa especial."
+          price="$100.00"
+          imgSrc={img.hamburgesa}
+          altText="Hamburguesa doble"
+        />
+        <Card
+          title="Hamburguesa Vegetariana"
+          description="Deliciosa hamburguesa a base de plantas con aguacate."
+          price="$75.00"
+          imgSrc={img.hamburgesa}
+          altText="Hamburguesa vegetariana"
+        />
+      </div>
 
-			<h2>Complementos</h2>
-			<div class="grid">
-				<Card 
-					title="Aros de Cebolla"
-					description="Crujientes aros de cebolla dorados a la perfección."
-					price="$30.00"
-					imgSrc={img.papas}
-					altText="Aros de cebolla"
-				/>
-				<Card 
-					title="Nuggets de Pollo"
-					description="Tiernos trozos de pollo empanizado, ideales para compartir."
-					price="$45.50"
-					imgSrc={img.papas}
-					altText="Nuggets de pollo"
-				/>
-				<Card 
-					title="Malteada"
-					description="Malteada de chocolate, fresa o vainilla."
-					price="$40.00"
-					imgSrc={img.papas}
-					altText="Malteada"
-				/>
-			</div>
-			</section>
-	</main>
-</Dem>
+      <h2>- Complementos -</h2>
+      <div class="grid">
+        <Card
+          title="Aros de Cebolla"
+          description="Crujientes aros de cebolla dorados a la perfección."
+          price="$30.00"
+          imgSrc={img.papas}
+          altText="Aros de cebolla"
+        />
+        <Card
+          title="Nuggets de Pollo"
+          description="Tiernos trozos de pollo empanizado, ideales para compartir."
+          price="$45.50"
+          imgSrc={img.papas}
+          altText="Nuggets de pollo"
+        />
+        <Card
+          title="Malteada"
+          description="Malteada de chocolate, fresa o vainilla."
+          price="$40.00"
+          imgSrc={img.papas}
+          altText="Malteada"
+        />
+      </div>
+    </section>
+  </main>
+</DemoFFLayout>
 
 <style>
-	h2{
-		color: var(--accent-yellow); 
-		margin-top: 50px;
-		margin-bottom: 20px;
-	}
+  section {
+    margin-top: 30px;
+  }
+
+  h2 {
+    color: var(--accent-yellow);
+    margin-top: 50px;
+    margin-bottom: 20px;
+	text-align: center;
+  }
+
+  .grid {
+    /* Habilitamos Grid */
+    display: grid;
+
+    /* CLAVE DE RESPONSIVIDAD: Auto-fit crea tantas columnas como quepan.
+           Mínimo 300px, y el resto del espacio se reparte equitativamente (1fr). */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 30px; /* Espacio entre las tarjetas de menú */
+    max-width: 1200px; /* Ancho máximo para el menú */
+    margin: 0 auto; /* Centrar la cuadrícula */
+    padding: 0 15px;
+  }
+
+  @media (max-width: 992px) {
+    .grid {
+      /* Mantenemos el auto-fit pero con un ancho mínimo ligeramente menor */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+
+  /* Tabletas y Móviles grandes (hasta 768px) */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2.5em;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+	    text-align: center;
+    }
+
+    .grid {
+      /* En móvil, forzamos un ancho mínimo más pequeño para que quepan 2 tarjetas */
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+  }
+
+  /* Móviles (hasta 480px) */
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 2em;
+    }
+
+	h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+	    text-align: center;
+    }
+
+    .grid {
+      /* Una sola columna para una navegación más fácil */
+      grid-template-columns: 1fr;
+      padding: 0 10px;
+    }
+  }
 </style>

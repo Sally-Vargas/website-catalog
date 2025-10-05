@@ -63,4 +63,19 @@ import heroImage from './img/hamburguesa-papas.jpg';
 			font-size: 2.5em;
 		}
 	}
+
+	 @media (max-width: 480px) {
+        .hero-section {
+            padding: 20px 10px;
+        }
+
+        .hero-content h1 {
+            /* Forzar un tamaño de fuente si clamp no es suficiente */
+            font-size: 2.2em; 
+        }
+
+        .hero-content p {
+            font-size: 1em;
+        }
+    }
 </style>
