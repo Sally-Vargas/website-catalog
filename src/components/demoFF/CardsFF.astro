@@ -1,0 +1,366 @@
+---
+import { Image } from "astro:assets";
+import type { TMenu } from "./utils/types";
+export type TCardFF = {
+  promos: TMenu[];
+  hideWithoutPromotion?: boolean;
+};
+type Props = TCardFF;
+
+const { promos, hideWithoutPromotion = false } = Astro.props;
+const isHide = () =>
+  hideWithoutPromotion ? " withoutPromo" : "";
+---
+
+<div class="grid">
+  {
+    promos.map(
+      ({
+        title,
+        description,
+        price,
+        img,
+        promoPrice,
+        promoDays: daysPromo,
+      }) => (
+        <div
+          class={"card-ff" + isHide()}
+          data-days-promo={daysPromo?.toString() ?? ""}
+        >
+          <div class="promo-ribbon">
+            <span>OFERTA</span>
+          </div>
+
+          <Image
+            {...img}
+            widths={[300, 400, 800]}
+            sizes="(max-width: 480px) 90vw, (max-width: 768px) 45vw, 30vw"
+            quality="mid"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <div class="card-ff-content">
+            <h3 class="card-ff-title">{title}</h3>
+            <p class="card-ff-description">{description}</p>
+            <div class="price-container">
+              <p class="card-ff-price original-price">{price}</p>
+              <p class="card-ff-price promo-price">{promoPrice}</p>
+              <p class="card-ff-price">{price}</p>
+            </div>
+          </div>
+        </div>
+      )
+    )
+  }
+</div>
+<script>
+  // --- Script: Activar promos por fecha o día ---
+  /**
+   * Marca las cards con clase `.promo` si la fecha o día actual
+   * coincide con alguno de los valores definidos en `days-promo`.
+   *
+   * Soporta:
+   *  - Días de la semana: ["lu", "ma", "mi", "ju", "vi", "sa", "do"]
+   *  - Fecha específica: ["2025-10-05"]
+   *  - Rango de fechas: ["2025-10-01:2025-10-10"]
+   *  - Hasta una fecha: ["hasta:2025-10-10"]
+   */
+  const activatePromos = () => {
+    const timeZone = "America/Mexico_City";
+
+    // Fecha actual en zona horaria específica
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone }));
+    const todayWeekDay = ["do", "lu", "ma", "mi", "ju", "vi", "sa"][
+      now.getDay()
+    ];
+    const todayDate = now.toISOString().split("T")[0]; // "YYYY-MM-DD"
+
+    // Función auxiliar: compara fechas sin horas
+    const parseDate = (str: string) => new Date(`${str}T00:00:00`);
+
+    // Seleccionar todos los contenedores con días de promo
+    const priceContainers = document.querySelectorAll(".card-ff");
+
+    priceContainers.forEach((container) => {
+      const daysPromoAttr = container.getAttribute("data-days-promo");
+      if (!daysPromoAttr) return;
+
+      const promoValues = daysPromoAttr
+        .split(",")
+        .map((v) => v.trim().toLowerCase())
+        .filter(Boolean);
+
+      let isPromo = false;
+
+      for (const value of promoValues) {
+        // --- Día de la semana ---
+        if (["lu", "ma", "mi", "ju", "vi", "sa", "do"].includes(value)) {
+          if (value === todayWeekDay) {
+            isPromo = true;
+            break;
+          }
+        }
+
+        // --- Hasta cierta fecha ---
+        else if (value.startsWith("hasta:")) {
+          const endDate = parseDate(value.replace("hasta:", ""));
+          if (now <= endDate) {
+            isPromo = true;
+            break;
+          }
+        }
+
+        // --- Rango de fechas ---
+        else if (value.includes(":")) {
+          const [startStr, endStr] = value.split(":");
+          const startDate = parseDate(startStr);
+          const endDate = parseDate(endStr);
+          if (now >= startDate && now <= endDate) {
+            isPromo = true;
+            break;
+          }
+        }
+
+        // --- Fecha exacta ---
+        else if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+          if (value === todayDate) {
+            isPromo = true;
+            break;
+          }
+        }
+      }
+
+      if (isPromo) {
+        container.classList.add("promo");
+        container.classList.remove("withoutPromo");
+      }
+    });
+  };
+  if (!window.cardsFastFoodInit) {
+    window.cardsFastFoodInit = true;
+    document.addEventListener("DOMContentLoaded", activatePromos);
+  }
+</script>
+<style>
+  .withoutPromo {
+    display: none;
+  }
+  .card-ff {
+    position: relative; /* Necesario para posicionar el listón */
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease;
+    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura dentro de un grid */
+    max-width: 400px;
+    min-width: 240px;
+    margin: 0 auto;
+  }
+  .card-ff:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  .card-ff :global(img) {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .card-ff-content {
+    padding: 20px;
+  }
+  .card-ff-title {
+    color: var(--accent-red);
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+  .card-ff-description {
+    /* color: var(--accent-yellow);
+		font-size: 0.9em;
+		margin-bottom: 15px; */
+    color: var(--accent-yellow);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    /* Ajuste sutil: limita la altura del texto de descripción si es demasiado largo */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .price-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+    min-height: 2.2em; /* Evita saltos de layout si una card-ff tiene promo y otra no */
+  }
+
+  .card-ff-price {
+    font-family: "Bebas Neue", sans-serif;
+    color: var(--text-white);
+    font-size: 1.8em;
+    margin: 0;
+  }
+
+  .original-price {
+    font-size: 1.2em;
+    color: #888;
+    text-decoration: line-through;
+  }
+  .price-container.promo p {
+    display: none;
+  }
+  .original-price,
+  .promo-price {
+    display: none;
+  }
+
+  .price-container.promo .original-price,
+  .price-container.promo .promo-price {
+    display: block;
+  }
+
+  .promo-price {
+    color: var(--accent-yellow);
+    font-size: 2em;
+  }
+
+  /* Estilos para el listón de promoción */
+  .promo-ribbon {
+    display: none;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+  .promo-ribbon::before,
+  .promo-ribbon::after {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    display: block;
+    border: 5px solid #c0392b; /* Un rojo más oscuro para el borde */
+  }
+  .promo-ribbon span {
+    position: absolute;
+    display: block;
+    width: 170px;
+    padding: 8px 0;
+    background-color: var(--accent-red);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.1em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    text-align: center;
+    left: -35px;
+    top: 30px;
+    transform: rotate(45deg);
+  }
+  .promo .promo-ribbon {
+    display: block;
+  }
+  .promo .card-ff-content .price-container .card-ff-price {
+    display: none;
+  }
+  .promo .card-ff-content .price-container .original-price,
+  .promo .card-ff-content .price-container .promo-price {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+
+    .card-ff :global(img) {
+      /* Reducimos la altura de la imagen para que ocupe menos espacio vertical */
+      height: 180px;
+    }
+
+    .card-ff-title {
+      font-size: 1.4em;
+    }
+
+    .original-price {
+      font-size: 1.1em;
+    }
+
+    .promo-price {
+      font-size: 1.7em;
+    }
+  }
+
+  /* ------------------------------------------------ */
+  /* MEDIA QUERY: Móviles pequeños (<= 480px) */
+  /* ------------------------------------------------ */
+  @media (max-width: 480px) {
+    .card-ff {
+      margin: 0 15px;
+    }
+
+    .card-ff :global(img) {
+      /* Reducimos aún más la altura para pantallas pequeñas */
+      height: 150px;
+    }
+
+    .card-ff-content {
+      padding: 15px;
+    }
+
+    .card-ff-title {
+      font-size: 1.2em; /* Texto más pequeño para caber mejor */
+    }
+
+    .card-ff-description {
+      font-size: 0.85em;
+      margin-bottom: 10px;
+    }
+
+    .original-price {
+      font-size: 1em;
+    }
+
+    .promo-price {
+      font-size: 1.5em; /* Precio más discreto */
+    }
+  }
+
+  .grid {
+    /* Habilitamos Grid */
+    display: grid;
+
+    /* CLAVE DE RESPONSIVIDAD: Auto-fit crea tantas columnas como quepan.
+           Mínimo 300px, y el resto del espacio se reparte equitativamente (1fr). */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 30px; /* Espacio entre las tarjetas de menú */
+    max-width: 1200px; /* Ancho máximo para el menú */
+    margin: 0 auto; /* Centrar la cuadrícula */
+    padding: 0 15px;
+  }
+
+  @media (max-width: 992px) {
+    .grid {
+      /* Mantenemos el auto-fit pero con un ancho mínimo ligeramente menor */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+  @media (max-width: 768px) {
+    .grid {
+      /* En móvil, forzamos un ancho mínimo más pequeño para que quepan 2 tarjetas */
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+  }
+  @media (max-width: 480px) {
+    .grid {
+      /* Una sola columna para una navegación más fácil */
+      grid-template-columns: 1fr;
+      padding: 0 10px;
+    }
+  }
+</style>

@@ -1,5 +1,19 @@
 ---
 import HomeBtn from "../HomeBtn.astro";
+type TLink = { href: string; title: string };
+
+export const navLinks: { [key: string]: TLink }= {
+  inicio:{ href: "/demoff/", title: "Inicio" },
+  promociones:{ href: "/demoff/promociones", title: "Promociones" },
+  menu:{ href: "/demoff/menu", title: "Menú" },
+  ubicacion:{ href: "/demoff/ubicacion", title: "Ubicación" },
+}
+const navList = [
+  navLinks.inicio,
+  navLinks.promociones,
+  navLinks.menu,
+  navLinks.ubicacion,
+];
 ---
 
 <header class="main-header">
@@ -10,10 +24,15 @@ import HomeBtn from "../HomeBtn.astro";
     </div>
     <nav class="nav" id="nav">
       <ul class="nav-list">
-        <li><a href="/demoff/" class="nav-link">Inicio</a></li>
-        <li><a href="/demoff/promociones" class="nav-link">Promociones</a></li>
-        <li><a href="/demoff/menu" class="nav-link">Menú</a></li>
-        <li><a href="/demoff/ubicacion" class="nav-link">Ubicación</a></li>
+        {
+          navList.map((link) => (
+            <li>
+              <a href={link.href} class="nav-link">
+                {link.title}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
     <button class="menu-toggle" id="menu-toggle">

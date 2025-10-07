@@ -5,9 +5,9 @@ import ButtonBs from "./ButtonBs.astro";
 
 const hero = {
   title: "Tu Estilo, Nuestra Pasión.",
-  paragraph:"Expertos en cabello que transforman tu look y realzan tu belleza natural."
-}
-
+  paragraph:
+    "Expertos en cabello que transforman tu look y realzan tu belleza natural.",
+};
 ---
 
 <section class="hero" id="hero">
@@ -16,7 +16,8 @@ const hero = {
     alt="Mujer con cabello estilizado en un salón de belleza"
     widths={[480, 768, 1280, 1920]}
     sizes="100vw"
-    quality="mid"
+    quality="high"
+    decoding="async"
     loading="eager"
     class="hero-bg-image"
   />
@@ -24,7 +25,7 @@ const hero = {
   <div class="hero-content">
     <h1>{hero.title}</h1>
     <p>{hero.paragraph}</p>
-    <ButtonBs text="Agenda tu Cita" href="#contacto" type="white"/>
+    <ButtonBs text="Agenda tu Cita" href="#contacto" type="white" />
   </div>
 </section>
 <style>

@@ -1,31 +1,120 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Header from './Header.astro';
-import Footer from './Footer.astro';
-import '../styles/global.css';
+import Header from "@/components/demoFF/Header.astro";
+import Footer from "@/components/demoFF/Footer.astro";
 
-interface Props {
-	title: string;
+type Props = {
+  title: string;
+  lang?: "es" | "en";
 }
 
-const { title } = Astro.props;
+const { title,lang = "es" } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-	<title>{title}</title>
-	<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-	<ViewTransitions />
-</head>
-<body>
-	<Header />
-	<slot />
-	<Footer />
-</body>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <Header />
+    <div class="main-content-wrapper">
+      <slot />
+    </div>
+    <Footer />
+  </body>
 </html>
+<style is:global>
+  .main-content-wrapper {
+    flex-grow: 1;
+  }
+
+  :root {
+    --bg-dark: #1a1a1a;
+    --accent-red: #d90429;
+    --accent-yellow: #ffc300;
+    --text-white: #fefefe;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Bebas Neue", sans-serif;
+    color: var(--accent-red);
+    letter-spacing: 2px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--text-white);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 30px 0;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 3em;
+    margin: 50px 0;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: var(--accent-red);
+    color: var(--text-white);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .btn:hover {
+    background-color: #a3021e;
+  }
+
+  /* Grids */
+  .grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+</style>

@@ -1,88 +1,93 @@
 ---
-import { Image } from 'astro:assets';
-import hamburgesa from './img/hamburguesa.jpg';
-import hamburgesaCPapas from './img/hamburguesa-papas.jpg';
-import papas from './img/papas.jpg';
-import aguacate from './img/aguacate.jpg';
+import { Image } from "astro:assets";
+import { menuImage } from "./service/imageService";
+
+// 1. Definimos las imágenes únicas en un array
+const promoImages = Object.values(menuImage);
+// 2. Duplicamos el array para el efecto de bucle infinito
+const carouselItems = [...promoImages, ...promoImages];
 ---
 
 <section id="promociones" class="section">
   <h2 class="section-title">Promociones del Mes</h2>
-  <div class="carousel-container">
-    <div class="carousel-track">
-      <Image src={hamburgesaCPapas} alt="Promoción 1" />
-      <Image src={hamburgesa} alt="Promoción 2" />
-      <Image src={papas} alt="Promoción 3" />
-      <Image src={aguacate} alt="Promoción 4" />
-
-      <Image
-        src={papas}
-        alt="Promoción 1 (duplicado)"
-      />
-      <Image src={hamburgesa} alt="Promoción 2 (duplicado)" />
-      <Image src={papas} alt="Promoción 3 (duplicado)" />
-      <Image src={aguacate} alt="Promoción 4 (duplicado)" />
+  <div class="carousel-container" style={`--image-count: ${promoImages.length};`}>
+    <div class="carousel-track" >
+      {
+        carouselItems.map((item, index) => (
+          <Image
+            {...item}
+            widths={[300, 400]}
+            sizes="(max-width: 768px) 300px, 400px"
+            quality="mid"
+            loading={index < 4 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
   /* --- 1. Variables Globales --- */
-  :root {
-    --image-width: 400px; /* Ancho de cada imagen en escritorio */
-    --image-count: 4; /* Número de imágenes en el set original */
-    --scroll-duration: 15s;
-  }
-
   .carousel-container {
+    --image-width-desktop: 400px;
+    --image-width-mobile: 300px;
+    --scroll-duration: 25s; /* Aumentado para un desplazamiento más suave */
     width: 100%;
     overflow: hidden;
+    /* Agregamos un degradado en los bordes para un efecto de desvanecimiento */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
+
 
   /* --- 2. Track y Animación --- */
   .carousel-track {
     display: flex;
-    /* La animación DEBE apuntar al keyframe correcto */
-    animation: scroll var(--scroll-duration) linear infinite;
-    /* Ancho total: 2 sets * ancho_imagen */
-    width: calc(var(--image-width) * var(--image-count) * 2);
+    /* Ancho total: (ancho de imagen) * (número de imágenes) * 2 (porque duplicamos el set) */
+    width: calc(var(--image-width-desktop) * var(--image-count) * 2);
+    animation: scroll-animation var(--scroll-duration) linear infinite;
   }
 
   .carousel-track :global(img) {
     height: 300px;
-    width: var(--image-width);
+    width: var(--image-width-desktop);
     object-fit: cover;
     flex-shrink: 0;
-    margin-right: 0;
   }
 
-  /* --- 3. Keyframes (Nombre Corregido) --- */
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    /* El desplazamiento es el ancho exacto del set original (4 imágenes) */
+  /* --- 3. Keyframes para un bucle perfecto --- */
+  @keyframes scroll-animation {
+    from { transform: translateX(0); }
     100% {
-      transform: translateX(calc(var(--image-width) * var(--image-count) * -1));
+      /* Desplazamos el track la distancia exacta de un set de imágenes */
+      transform: translateX(calc(var(--image-width-desktop) * var(--image-count) * -1));
     }
   }
 
-  /* --- 4. Media Queries (Uso de Variables Consistentes) --- */
+  /* --- 4. Media Queries --- */
   @media (max-width: 768px) {
-    /* Sobreescribe las variables CSS para el móvil */
-    :root {
-      --image-width: 300px; /* Nuevo ancho para móvil */
-      --scroll-duration: 12s; /* Opcional: ajustar velocidad en móvil */
-    }
-
     .section-title {
       font-size: 2em;
     }
 
     .carousel-track :global(img) {
       /* Ya no necesitas min-width si usas la variable width: var(--image-width); */
-      width: var(--image-width);
+      width: var(--image-width-mobile);
       height: 200px;
+    }
+    .carousel-track {
+      /* Recalculamos el ancho del track y la animación para móvil */
+      width: calc(var(--image-width-mobile) * var(--image-count) * 2);
+      animation-name: scroll-animation-mobile;
+    }
+  }
+
+  @keyframes scroll-animation-mobile {
+    from { transform: translateX(0); }
+    to {
+      transform: translateX(calc(var(--image-width-mobile) * var(--image-count) * -1));
     }
   }
 </style>

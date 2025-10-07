@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import heroImage from './img/hamburguesa-papas.jpg';
+import { navLinks } from './Header.astro';
+
 ---
 
 <section class="hero-section">
@@ -9,14 +11,16 @@ import heroImage from './img/hamburguesa-papas.jpg';
 		alt="Fondo de hamburguesas con papas fritas"
 		widths={[480, 768, 1280, 1920]}
         sizes="100vw"
-        quality="mid"
+        quality="high" 
+        loading="eager"
+        decoding="async"
 		class="hero-bg-image"
 	/>
 	<div class="hero-overlay"></div>
 	<div class="hero-content">
 		<h1>El Sabor Que Amas, A Tu Manera.</h1>
 		<p>Las hamburguesas más jugosas y el servicio más rápido de la ciudad.</p>
-		<a href="/menu" class="btn">Ver Menú</a>
+		<a href={navLinks.menu.href} class="btn">Ver Menú</a>
 	</div>
 </section>
 

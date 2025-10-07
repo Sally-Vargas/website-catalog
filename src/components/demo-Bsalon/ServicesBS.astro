@@ -78,6 +78,9 @@ const servicesData = [
               height={200}
               widths={[400, 800]}
               sizes="(max-width: 1024px) 90vw, 40vw"
+              quality="mid"
+              loading="lazy"
+              decoding="async"
             />
             <h3>{service.title}</h3>
             <p>{service.description}</p>
@@ -90,17 +93,17 @@ const servicesData = [
 
 <style>
   .services-grid {
-  display: grid;
-  gap: 30px;
-}
+    display: grid;
+    gap: 30px;
+  }
 
-.services-grid {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 
-.services-grid h3 {
-  color: #f28482;
-}
+  .services-grid h3 {
+    color: #f28482;
+  }
   .service-item :global(img) {
     width: 100%;
     height: 200px;
