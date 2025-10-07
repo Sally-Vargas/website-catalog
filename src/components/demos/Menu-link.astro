@@ -1,26 +1,24 @@
 ---
+import { img } from "./repository/imgRepository";
 import Card from "./Card.astro";
 
 const projects = [
   {
     title: 'Demo Fast Food',
-    image: '/assets/img/img-FF-2.png',
-    description:
-      'Demostración de una página web para un restaurante de comida rápida.',
+    image: img.fastFood2,
+    description: 'Demostración de una página web para un restaurante de comida rápida.',
     link: '/demoff'
   },
   {
     title: 'Demo Beauty Salon',
-    image: '/assets/img/img-DS.png',
-    description:
-      'Demostración de una landing page para un salon de belleza.',
+    image: img.demoBeautySalon,
+    description: 'Demostración de una landing page para un salon de belleza.',
     link: '/demoBeautySalon'
   },
   {
     title: 'Demo Nails Salon',
-    image: '/assets/img/img-DN.png',
-    description:
-      'Demostración de una landing page para un salon de uñas.',
+    image: img.demoNails,
+    description: 'Demostración de una landing page para un salon de uñas.',
     link: '/demoNails'
   }
 ];
@@ -28,12 +26,14 @@ const projects = [
 
 <div class="box-section">
     <div class="boxes-container">
-        {projects.map((project) => (
+        {projects.map((project, index) => (
         <Card 
         title={project.title}
-        image={project.image}
+        image={project.image.src}
+        alt={project.image.alt}
         description={project.description}
         link={project.link}
+        loading={index === 0 ? "eager" : "lazy"}
         />
         ))}
     </div>

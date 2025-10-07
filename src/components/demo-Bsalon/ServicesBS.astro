@@ -1,65 +1,49 @@
 ---
 import { Image } from "astro:assets";
-// Importa las imágenes desde la carpeta `src`
-import corteImg from "./BSImg/corte.jpg";
-import tinteImg from "./BSImg/tinte.jpg";
-import tratamientoImg from "./BSImg/tratamiento.jpg";
-import depilacionImg from "./BSImg/depilacion.jpg";
-import peinadosImg from "./BSImg/peinados.jpg";
-import maquillajeImg from "./BSImg/maquillaje.jpg";
-import cejasPestanasImg from "./BSImg/cejas-pestañas.jpg";
-import unasImg from "./BSImg/uñas.jpg";
+import { img, type TImage } from "./repository/imgRepository";
 
-const servicesData = [
+const servicesData: { title: string; img: TImage; description: string }[] = [
   {
-    img: corteImg,
-    alt: "Corte de cabello",
     title: "Corte",
     description: "Dama, caballero, niños.",
+    img: img.corteImg,
   },
   {
-    img: tinteImg,
-    alt: "Coloración de cabello",
     title: "Coloración",
     description:
       "Tinte, retoque, alta y media decoloración, mechas, balayage, highlights.",
+      img: img.tinteImg,
   },
   {
-    img: tratamientoImg,
-    alt: "Tratamientos Capilares",
     title: "Tratamientos",
     description: "Hidratación y reparación, keratina, botox capilar.",
+    img: img.tratamientoImg,
   },
   {
-    img: depilacionImg,
-    alt: "Depilación facial",
     title: "Depilación",
     description: "Facial, ceja, bozo.",
+    img: img.depilacionImg,
   },
   {
-    img: peinadosImg,
-    alt: "Peinado para eventos",
     title: "Peinado",
     description:
       "Alaciado, curly, recogido, semirecogido, eventos, bodas, fiestas.",
+    img: img.peinadosImg,
   },
   {
-    img: maquillajeImg,
-    alt: "Maquillaje profesional",
     title: "Maquillaje profesional",
     description: "Para eventos, novias, etc.",
+    img: img.maquillajeImg,
   },
   {
-    img: cejasPestanasImg,
-    alt: "Diseño de cejas y pestañas",
     title: "Cejas y pestañas",
     description: "Diseño, microblading, lifting, extensiones.",
+    img: img.cejasPestanasImg,
   },
   {
-    img: unasImg,
-    alt: "Manicure y pedicure",
     title: "Uñas",
     description: "Manicure, pedicure, uñas acrílicas, gelish, personalizados.",
+    img: img.unasImg,
   },
 ];
 ---
@@ -72,8 +56,8 @@ const servicesData = [
         servicesData.map((service) => (
           <div class="service-item">
             <Image
-              src={service.img}
-              alt={service.alt}
+              src={service.img.src}
+              alt={service.img.alt}
               width={300}
               height={200}
               widths={[400, 800]}

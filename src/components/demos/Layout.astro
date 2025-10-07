@@ -1,4 +1,32 @@
-:root {
+---
+import { ViewTransitions } from 'astro:transitions';
+import Header from './Header.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>{title}</title>
+	<!-- <ViewTransitions /> -->
+</head>
+<body>
+	<Header/>
+	<main>
+		<slot />
+	</main>
+</body>
+</html>
+
+<style is:global>
+	:root {
 	--font-primary: 'Helvetica Neue', Arial, sans-serif;
 	--font-secondary: 'Georgia', serif;
 	--color-dark: #121212;
@@ -54,3 +82,4 @@ h1, h2, h3 {
     justify-content: center;
     align-items: center;
 }
+</style>

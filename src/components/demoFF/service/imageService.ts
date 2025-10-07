@@ -12,19 +12,3 @@ export const menuImage:{[key:string]:ImageMenu} = {
     soda: { src: soda, alt: "Soda" },
     aguacate: { src: aguacate, alt: "Burrito" },
 }
-
-// class MenuService {
-    
-//   getMenuHamburguesas() {
-//     return FFMenuHamburguesas;
-//   }
-
-//   getMenuComplementos() {
-//     return FFMenuComplementos;
-//   }
-
-//   getPromoHamb() {
-//     return FFPromoHamb;
-//   }
-
-// }

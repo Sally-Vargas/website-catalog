@@ -1,17 +1,21 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
-  image: string;
+  image: ImageMetadata;
+  alt: string;
   description: string;
   link: string;
+  loading?: "eager" | "lazy";
 }
 
-const { title, image, description, link } = Astro.props;
+const { title, image, alt, description, link, loading = "lazy" } = Astro.props;
 ---
 
 <div class="card">
   <div class="card-left">
-    <img src={image} />
+    <Image src={image} alt={alt} widths={[400, 800]} sizes="(max-width: 768px) 100vw, 400px" quality="mid" loading={loading} decoding="async" />
   </div>
   <div class="card-right">
     <div class="card-content">

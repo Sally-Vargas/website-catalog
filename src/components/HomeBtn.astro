@@ -27,22 +27,27 @@ const { href = '/', class: className = '', title = '' } = Astro.props;
 
 <style>
   .home-button {
-    /* Reseteo y base del botón */
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    border-radius: 50%; /* Lo hace redondo */
-    background-color: #333; /* Fondo oscuro por defecto */
-    color: white; /* Color del icono */
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none; /* Quitar subrayado del enlace */
+    text-decoration: none;
+
+    /* Posicionamiento flotante */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
   }
 
   .home-button:hover {
-    background-color: #555; /* Oscurecer al pasar el ratón */
+    background-color: rgba(0, 0, 0, 0.7);
     transform: scale(1.05);
   }
 

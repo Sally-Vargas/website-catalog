@@ -10,7 +10,7 @@ export const menu: TMenu[] = [
         price: "89.50",
         promoPrice: "75.00",
         promoDays: ["sa", "do"],
-        img: menuImage.hamburgesa,
+        img: menuImage.hamburgesaCPapas,
         tag: ["hamburgesas"],
         type: "comida",
         sortOrder: 10
@@ -32,7 +32,7 @@ export const menu: TMenu[] = [
         price: "99.00",
         promoPrice: "85.00",
         promoDays: ["ma"],
-        img: menuImage.hamburgesa,
+        img: menuImage.hamburgesaCPapas,
         tag: ["hamburgesas"],
         type: "comida",
         sortOrder: 30
@@ -90,7 +90,7 @@ export const menu: TMenu[] = [
         price: "80.00",
         promoPrice: "70.00",
         promoDays: ["ju"],
-        img: menuImage.aguacate,
+        img: menuImage.papas,
         tag: ["burritos"],
         type: "comida",
         sortOrder: 100
