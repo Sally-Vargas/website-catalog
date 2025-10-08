@@ -1,8 +1,8 @@
 ---
-import menuService from "@/components/demoFF/service/menuServices";
-import CardsFF from "../../components/demoFF/CardsFF.astro";
+import menuService from "@/demoComponents/demoFF/service/menuServices";
+import CardsFF from "../../demoComponents/demoFF/CardsFF.astro";
 import Layout from "@/components/demoFF/Layout.astro";
-import { tags, type TMenu } from "@/components/demoFF/utils/types";
+import { tags, type TMenu } from "@/demoComponents/demoFF/utils/types";
 
 const menu: { title: string; menu: TMenu[] }[] = tags.type.map(type=>({
   title: type.charAt(0).toUpperCase() + type.slice(1), // Capitalize the first letter for display

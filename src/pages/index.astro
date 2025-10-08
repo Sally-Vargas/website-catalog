@@ -1,9 +1,5 @@
 ---
-import MenuLink from "../components/demos/Menu-link.astro";
-import Layout from "../components/demos/Layout.astro";
+// Detecta el idioma del navegador del usuario desde la cabecera 'Accept-Language'.
 
-
+return Astro.redirect(`/demos/`);
 ---
-<Layout title="Catálogo de páginas">
-	<MenuLink/>
-</Layout>
