@@ -1,0 +1,162 @@
+---
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+
+const navLinks = {
+  es: [
+    { href: "#tratamientos", text: "Tratamientos" },
+    { href: "#galeria", text: "Galería" },
+    { href: "#doctor", text: "El Doctor" },
+    { href: "#contacto", text: "Contacto" },
+  ],
+  en: [
+    { href: "#treatments", text: "Treatments" },
+    { href: "#gallery", text: "Gallery" },
+    { href: "#doctor", text: "The Doctor" },
+    { href: "#contact", text: "Contact" },
+  ],
+};
+
+const currentLinks = navLinks[lang];
+const otherLang = lang === "es" ? "en" : "es";
+const otherLangText = lang === "es" ? "EN" : "ES";
+const path = `/demo-doctor`;
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <nav class="main-nav">
+      <div class="logo">
+        <a href=`${path}/${lang}/`>Dr. Mendoza</a>
+      </div>
+      <ul class="nav-links">
+        {
+          currentLinks.map((link) => (
+            <li>
+              <a href={link.href} class="nav-link">
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="header-actions">
+        <a href=`${path}/${otherLang}/` class="lang-switcher">
+          {otherLangText}
+        </a>
+        <a href="#contacto" class="cta-button">
+          {lang === "es" ? "Agendar Cita" : "Book Appointment"}
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+<style>
+  .site-header {
+    background-color: rgba(255, 255, 255, 0.8); /* bg-white/80 */
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+    -webkit-backdrop-filter: blur(12px); /* Soporte para Safari */
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); /* shadow-sm */
+    position: sticky; /* sticky */
+    top: 0; /* top-0 */
+    z-index: 50; /* z-50 */
+  }
+
+  .header-container {
+    width: 100%;
+    max-width: 1280px; /* container */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .logo a {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: #111827; /* text-gray-900 */
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: none; /* hidden por defecto */
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem; /* space-x-6 */
+  }
+
+  .nav-link {
+    color: #4b5563; /* text-gray-600 */
+    text-decoration: none;
+    transition: color 0.3s ease; /* transition-colors duration-300 */
+  }
+
+  .nav-link:hover {
+    color: #2563eb; /* hover:text-blue-600 */
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* space-x-4 */
+  }
+
+  .lang-switcher {
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    padding: 0.25rem 0.75rem; /* px-3 py-1 */
+    font-size: 0.875rem; /* text-sm */
+    color: #4b5563; /* text-gray-600 */
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .lang-switcher:hover {
+    background-color: #f3f4f6; /* hover:bg-gray-100 */
+  }
+
+  .cta-button {
+    display: none; /* hidden por defecto */
+    background-color: #2563eb; /* bg-blue-600 */
+    color: white;
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    border-radius: 0.375rem; /* rounded-md */
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow */
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+  }
+
+  .cta-button:hover {
+    background-color: #1d4ed8; /* hover:bg-blue-700 */
+  }
+
+  /* Media Queries para estilos responsivos */
+  @media (min-width: 640px) {
+    /* sm: */
+    .cta-button {
+      display: inline-block; /* sm:inline-block */
+    }
+  }
+
+  @media (min-width: 768px) {
+    /* md: */
+    .nav-links {
+      display: flex; /* md:flex */
+    }
+  }
+</style>

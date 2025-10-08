@@ -1,0 +1,10 @@
+---
+// Detecta el idioma del navegador del usuario desde la cabecera 'Accept-Language'.
+const langHeader = Astro.request.headers.get('accept-language');
+
+// Si el idioma principal es español ('es'), redirige a la versión en español.
+// Para cualquier otro idioma, redirige a la versión en inglés como predeterminada.
+const lang = langHeader?.startsWith('es') ? 'es' : 'en';
+
+return Astro.redirect(`/demo-doctor/${lang}`);
+---

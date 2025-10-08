@@ -1,0 +1,147 @@
+---
+import type { TJsonLd } from '../types/json-ld';
+
+
+export interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  canonical?: string;
+
+  ogTitle?: string;
+  ogDescription?: string;
+  ogUrl?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+
+  jsonLd?: TJsonLd; // opcional para datos estructurados
+}
+
+const {
+  title,
+  description,
+  keywords,
+  author,
+  canonical,
+
+  ogTitle,
+  ogDescription,
+  ogUrl,
+  ogImage,
+  ogImageAlt,
+
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
+
+  jsonLd,
+} = Astro.props;
+
+// 🚨 Críticos
+if (!canonical) {
+  console.log(`🚨 ¡ADVERTENCIA SEO CRÍTICA! Falta el canonical en "${title}".`);
+}
+
+if (title.length > 60) {
+  console.log({
+    msg: "🚨 ¡ADVERTENCIA SEO CRÍTICA! El Título es demasiado largo. Máximo recomendado: 60 caracteres.",
+    title,
+    length: title.length,
+  });
+}
+
+if (!description) {
+  console.log(`🚨 ¡ADVERTENCIA SEO CRÍTICA! No hay descripción en "${title}".`);
+}
+
+if (!ogImage) {
+  console.log(`🚨 ¡ADVERTENCIA SEO CRÍTICA! No hay og:image en "${title}".`);
+}
+
+// ⚠️ Importantes
+if (description) {
+  if (description.length > 160) {
+    console.log({
+      msg: "⚠️ Descripción demasiado larga. Máximo recomendado: 160 caracteres.",
+      description,
+      length: description.length,
+    });
+  }
+  if (description.length < 50) {
+    console.log({
+      msg: "⚠️ Descripción muy corta. Se recomienda mínimo 50 caracteres.",
+      description,
+      length: description.length,
+    });
+  }
+}
+
+if (!ogUrl) console.log(`⚠️ Falta og:url en "${title}"`);
+if (!jsonLd) console.log(`⚠️ No hay JSON-LD en "${title}"`);
+
+// ℹ️ Opcionales
+if (!author) console.log(`ℹ️ No se especificó author en "${title}"`);
+if (!keywords) console.log(`ℹ️ No se especificaron keywords en "${title}"`);
+
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+
+  {description && <meta name="description" content={description} />}
+  {keywords && <meta name="keywords" content={keywords} />}
+  {author && <meta name="author" content={author} />}
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  {canonical && <link rel="canonical" href={canonical} />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  {ogTitle && <meta property="og:title" content={ogTitle} />}
+  {ogDescription && <meta property="og:description" content={ogDescription} />}
+  {ogUrl && <meta property="og:url" content={ogUrl} />}
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  {twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
+  {
+    twitterDescription && (
+      <meta name="twitter:description" content={twitterDescription} />
+    )
+  }
+  {twitterImage && <meta name="twitter:image" content={twitterImage} />}
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/page-favicon.ico" type="image/x-icon" />
+
+  <!-- Preconnect antes de las fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Iconos -->
+  <!-- <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  /> -->
+
+  <!-- JSON-LD (Schema.org) -->
+  {
+    jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )
+  }
+
+  <slot />
+</head>

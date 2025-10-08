@@ -1,0 +1,38 @@
+---
+import BaseHead from './BaseHead.astro';
+import '../styles/global.css';
+import '../styles/normalize.css';
+export interface Props {
+	title: string;
+	description: string;
+    lang: 'es' | 'en';
+}
+
+const { title, description, lang = 'es' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+	<BaseHead title={title} description={description}>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	</BaseHead>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html {
+		scroll-behavior: smooth; /* scroll-smooth */
+	}
+
+	body {
+		background-color: #f9fafb; /* bg-gray-50 */
+		/* Se usan las fuentes importadas de Google Fonts */
+		font-family: 'Roboto', 'Montserrat', sans-serif; /* font-sans */
+		color: #1f2937; /* text-gray-800 */
+		-webkit-font-smoothing: antialiased; /* antialiased */
+    	-moz-osx-font-smoothing: grayscale; /* antialiased */
+	}
+</style>

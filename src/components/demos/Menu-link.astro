@@ -1,51 +1,65 @@
 ---
-import { img } from "./repository/imgRepository";
+import { img, type TImage } from "./repository/imgRepository";
 import Card from "./Card.astro";
 
-const projects = [
+type Project = {
+  title: string;
+  image: TImage;
+  description: string;
+  link: string;
+};
+const projects: Project[] = [
   {
-    title: 'Demo Fast Food',
+    title: "Demo doctor",
     image: img.fastFood2,
-    description: 'Demostración de una página web para un restaurante de comida rápida.',
-    link: '/demoff'
+    description: "",
+    link: "/demo-doctor",
   },
   {
-    title: 'Demo Beauty Salon',
+    title: "Demo Fast Food",
+    image: img.fastFood2,
+    description:
+      "Demostración de una página web para un restaurante de comida rápida.",
+    link: "/demoff",
+  },
+  {
+    title: "Demo Beauty Salon",
     image: img.demoBeautySalon,
-    description: 'Demostración de una landing page para un salon de belleza.',
-    link: '/demoBeautySalon'
+    description: "Demostración de una landing page para un salon de belleza.",
+    link: "/demoBeautySalon",
   },
   {
-    title: 'Demo Nails Salon',
+    title: "Demo Nails Salon",
     image: img.demoNails,
-    description: 'Demostración de una landing page para un salon de uñas.',
-    link: '/demoNails'
-  }
+    description: "Demostración de una landing page para un salon de uñas.",
+    link: "/demoNails",
+  },
 ];
 ---
 
 <div class="box-section">
-    <div class="boxes-container">
-        {projects.map((project, index) => (
-        <Card 
-        title={project.title}
-        image={project.image.src}
-        alt={project.image.alt}
-        description={project.description}
-        link={project.link}
-        loading={index === 0 ? "eager" : "lazy"}
+  <div class="boxes-container">
+    {
+      projects.map((project, index) => (
+        <Card
+          title={project.title}
+          image={project.image.src}
+          alt={project.image.alt}
+          description={project.description}
+          link={project.link}
+          loading={index === 0 ? "eager" : "lazy"}
         />
-        ))}
-    </div>
+      ))
+    }
+  </div>
 </div>
-
 
 <style>
   :root {
     --bg: #5e548e;
   }
 
-  .box{
+  .box {
     margin-bottom: 100px;
   }
 
@@ -64,7 +78,6 @@ const projects = [
     flex-wrap: wrap;
     gap: 5rem 0;
   }
-
 
   /* Media query para pantallas responsivas (tabletas y móviles) */
   @media (max-width: 768px) {

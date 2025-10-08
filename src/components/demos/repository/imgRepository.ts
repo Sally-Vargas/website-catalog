@@ -2,7 +2,7 @@ import fastFood2 from "./img/img-FF-2.png"
 import demoBeautySalon from "./img/img-DS.png"
 import demoNails from "./img/img-DN.png"
 
-type TImage = {
+export type TImage = {
     src: ImageMetadata;
     alt: string;
 }

@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { href = '/', class: className = '', title = '' } = Astro.props;
+
 ---
 
 <a href={href} title={title} class={`home-button ${className}`}>

@@ -1,0 +1,37 @@
+---
+const year = new Date().getFullYear();
+const credit =""; //"Diseño web por Sally";
+---
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <p class="copyright-text">&copy; {year} Dr. Alejandro Mendoza. Todos los derechos reservados.</p>
+            {credit && <p class="credit-text">{credit}</p>}
+        </div>
+    </div>
+</footer>
+<style>
+    .site-footer {
+        background-color: #1f2937; /* bg-gray-800 */
+        color: #ffffff; /* text-white */
+    }
+
+    .footer-container {
+        width: 100%;
+        max-width: 1280px; /* container */
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem 1rem; /* py-8 px-4 */
+    }
+
+    .footer-content {
+        text-align: center;
+    }
+
+    .credit-text {
+        font-size: 0.875rem; /* text-sm */
+        color: #9ca3af; /* text-gray-400 */
+        margin-top: 0.5rem; /* mt-2 */
+    }
+</style>
